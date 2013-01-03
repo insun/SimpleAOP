@@ -2,9 +2,9 @@
 
 namespace mock;
 
-use SimpleAOP\Advice\Before;
+use SimpleAOP\Advice\Before\Simple as BeforeAdvice;
 
-class FooBefore extends Before
+class FooBefore extends BeforeAdvice
 {
     public function before($method, array $arguments = array())
     {

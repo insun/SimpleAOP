@@ -3,8 +3,9 @@
 namespace SimpleAOP\Advice\Feature;
 
 use AopJoinpoint;
+use SimpleAOP\Advice\AroundInterface;
 
-interface AroundInterface
+interface AroundSimpleInterceptorInterface extends AroundInterface
 {
     /**
      * Around advice

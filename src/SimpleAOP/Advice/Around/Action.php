@@ -1,11 +1,11 @@
 <?php
 
-namespace SimpleAOP\Advice;
+namespace SimpleAOP\Advice\Around;
 
 use AopJoinpoint;
-use SimpleAOP\Advice\Feature\AroundInterface;
+use SimpleAOP\Advice\Feature\AroundActionInterceptorInterface;
 
-abstract class Around extends AbstractAdvice implements AroundInterface
+abstract class Action extends AbstractAdvice implements AroundActionInterceptorInterface
 {
     /**
      * Advice callback
@@ -14,14 +14,11 @@ abstract class Around extends AbstractAdvice implements AroundInterface
      */
     public function __invoke(AopJoinpoint $jp)
     {
-        // save the join point
-        $this->setJoinPoint($jp);
-        
         // get the application request
         $request = $this->getServiceLocator()->get('Request');
         
         // check custom interceptor
-        $method = "around" . ucfirst($jp->getMethod());
+        $method = "around" . ucfirst($jp->getMethodName());
         if(method_exists($this, $method)) {
             call_user_func_array(array($this, $method), array($request, $jp));
             return $this;
@@ -34,7 +31,8 @@ abstract class Around extends AbstractAdvice implements AroundInterface
     
     /**
      * Around advice
+     * @param RequestInterface $request
      * @param AopJoinpoint $jp
      */
-    abstract public function around(AopJoinpoint $jp);
+    abstract public function around(RequestInterface $request, AopJoinpoint $jp);
 }

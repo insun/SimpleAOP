@@ -1,10 +1,11 @@
 <?php
 
-namespace SimpleAOP\Advice\Feature\Mvc;
+namespace SimpleAOP\Advice\Feature;
 
+use SimpleAOP\Advice\BeforeInterface;
 use Zend\Stdlib\RequestInterface;
 
-interface BeforeActionInterface
+interface BeforeActionInterceptorInterface extends BeforeInterface
 {
     /**
      * Before advice

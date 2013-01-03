@@ -15,16 +15,16 @@ Usage in ZF2
 The first step is the creation of your advice :
 
 ```php
-use SimpleAOP\Advice\Before;
+use SimpleAOP\Advice\Before\Simple as BeforeAdvice;
 
-class MyBeforeAdvice extends Before
+class MyBeforeAdvice extends BeforeAdvice
 {
     public function beforeFoo($arg1, $arg2)
     {
         // here a custom advice to intercept the foo method
     }
 
-    public function before($method, array $arguments = array())
+    public function before($method, array $arguments = array(), $target = null)
     {
         // here a generic advice, all methods which not override with custom interceptor
         // will be intercepted here
@@ -35,8 +35,6 @@ class MyBeforeAdvice extends Before
 On your own business class :
 
 ```php
-use SimpleAOP\Advice\Before;
-
 class MyBusiness
 {
     public function foo($arg1, $arg2)
@@ -71,9 +69,9 @@ Usage with the controllers
 Controllers have specials advices :
 
 ```php
-use SimpleAOP\Advice\Mvc\Before;
+use SimpleAOP\Advice\Before\Action as BeforeAdvice;
 
-class MyBeforeAdvice extends Before
+class MyBeforeAdvice extends BeforeAdvice
 {
     public function beforeMyAction($request)
     {

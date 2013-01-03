@@ -1,12 +1,19 @@
 <?php
 
-namespace SimpleAOP\Advice;
+namespace SimpleAOP\Advice\Before;
 
 use AopJoinpoint;
-use SimpleAOP\Advice\Feature\Mvc\BeforeActionInterface;
+use SimpleAOP\Advice\Feature\BeforeActionInterceptorInterface;
+use SimpleAOP\Advice\Feature\JoinPointAwareInterface;
 
-abstract class Before extends AbstractAdvice implements BeforeActionInterface
+abstract class Simple extends AbstractAdvice implements BeforeActionInterceptorInterface,
+    JoinPointAwareInterface
 {
+    /**
+     * @var AopJoinpoint 
+     */
+    protected $joinPoint;
+    
     /**
      * Advice callback
      * @param AopJoinpoint $jp
@@ -21,7 +28,7 @@ abstract class Before extends AbstractAdvice implements BeforeActionInterface
         $request = $this->getServiceLocator()->get('Request');
         
         // check custom interceptor
-        $method = "before" . ucfirst($jp->getMethod());
+        $method = "before" . ucfirst($jp->getMethodName());
         if(method_exists($this, $method)) {
             call_user_func_array(array($this, $method), $request);
             return $this;
@@ -37,4 +44,23 @@ abstract class Before extends AbstractAdvice implements BeforeActionInterface
      * @param RequestInterface $request
      */
     public function before(RequestInterface $request);
+    
+    /**
+     * Get the join point
+     * @return AopJoinpoint
+     */
+    public function getJoinPoint()
+    {
+        return $this->joinPoint;
+    }
+    
+    /**
+     * Set the joint point
+     * @param AopJoinpoint $jp
+     */
+    public function setJoinPoint(AopJoinpoint $jp)
+    {
+        $this->joinPoint = $jp;
+        return $this;
+    }
 }

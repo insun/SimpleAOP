@@ -2,9 +2,9 @@
 
 namespace mock;
 
-use SimpleAOP\Advice\After;
+use SimpleAOP\Advice\After\Simple as AfterAdvice;
 
-class FooAfter extends After
+class FooAfter extends AfterAdvice
 {
     public function after($return)
     {

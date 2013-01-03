@@ -1,13 +1,14 @@
 <?php
 
-namespace SimpleAOP\Advice\Feature\Mvc;
+namespace SimpleAOP\Advice\Feature;
 
 use AopJoinpoint;
+use SimpleAOP\Advice\AroundInterface;
 
-interface AroundInterface
+interface AroundActionInterceptorInterface extends AroundInterface
 {
     /**
-     * Before advice
+     * Around advice
      * @param RequestInterface $request
      * @param AopJoinpoint $jp
      */

@@ -3,9 +3,9 @@
 namespace SimpleAOP\Advice;
 
 use AopJoinpoint;
-use SimpleAOP\Advice\Feature\BeforeInterface;
+use SimpleAOP\Advice\Feature\BeforeInterceptorInterface;
 
-abstract class Before extends AbstractAdvice implements BeforeInterface
+abstract class Before extends AbstractAdvice implements BeforeInterceptorInterface
 {
     /**
      * Advice callback
@@ -14,28 +14,27 @@ abstract class Before extends AbstractAdvice implements BeforeInterface
      */
     public function __invoke(AopJoinpoint $jp)
     {
-        // save the join point
-        $this->setJoinPoint($jp);
-        
         // check custom interceptor
-        $method = "before" . ucfirst($jp->getMethod());
+        $method = "before" . ucfirst($jp->getMethodName());
         if(method_exists($this, $method)) {
-            call_user_func_array(array($this, $method), $jp->getArguments());
+            call_user_func_array(array($this, $method), $jp);
             return $this;
         }
         
         // call generic interceptor
-        $args = $this->before($method, $jp->getArguments());
-        if(is_array($args)) {
-            $jp->setArguments($args);
-        }
+        $this->before($jp);
         return $this;
     }
     
     /**
      * Before advice
-     * @param string $method
-     * @param array $arguments
+     * @param AopJoinpoint $jp
      */
-    abstract public function before($method, array $arguments = array());
+    abstract public function before(AopJoinpoint $jp);
+    
+    /**
+     * Get the point cut selector
+     * @return string
+     */
+    abstract public function getPointCut();
 }

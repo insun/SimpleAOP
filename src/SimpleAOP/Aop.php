@@ -8,26 +8,25 @@ use Zend\Stdlib\Exception;
 class Aop implements ServiceLocatorAwareInterface
 {
     /**
-     * Constants for advice
-     */
-    const BEFORE = 'before';
-    const AFTER = 'after';
-    const AROUND = 'around';
-    
-    /**
      * @var ServiceLocatorInterface
      */
     protected $serviceLocator;
     
     /**
      * Add an advice with the selector
-     * @param string $selector
-     * @param \SimpleAOP\Advice\AdviceInterface\string $advice
+     * @param \SimpleAOP\Advice\AdviceInterface|string $advice
      */
-    public function register($selector, $advice)
+    public function register($advice)
     {
-        if(!$advice instanceof Advice\AdviceInterface) {
+        // TODO : create a AdvicePluginManager to manager this
+        if(is_string($advice)) {
             $advice = $this->getServiceLocator()->get($advice);
+        }
+        
+        if(!$advice instanceof Advice\AdviceInterface) {
+            throw new Exception\InvalidArgumentException(sprintf(
+                'Advice must be an instance of %s\Advice\AdviceInterface', __NAMESPACE__
+            ));
         }
         
         if($advice instanceof ServiceLocatorAwareInterface) {
@@ -35,14 +34,14 @@ class Aop implements ServiceLocatorAwareInterface
         }
         
         switch(true) {
-            case ($advice instanceof Advice\Feature\BeforeInterface) :
-                aop_add_before($selector, $advice);
+            case ($advice instanceof Advice\BeforeInterface) :
+                aop_add_before($advice->getPointCut(), $advice);
                 break;
-            case ($advice instanceof Advice\Feature\AfterInterface) :
-                aop_add_after($selector, $advice);
+            case ($advice instanceof Advice\AfterInterface) :
+                aop_add_after($advice->getPointCut(), $advice);
                 break;
-            case ($advice instanceof Advice\Feature\AroundInterface) :
-                aop_add_around($selector, $advice);
+            case ($advice instanceof Advice\AroundInterface) :
+                aop_add_around($advice->getPointCut(), $advice);
                 break;
             default:
                 throw new Exception\InvalidArgumentException(sprintf(

@@ -2,7 +2,9 @@
 
 namespace SimpleAOP\Advice\Feature;
 
-interface AfterInterface
+use SimpleAOP\Advice\AfterInterface;
+
+interface AfterSimpleInterceptorInterface extends AfterInterface
 {
     /**
      * After advice

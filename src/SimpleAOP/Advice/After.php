@@ -3,9 +3,9 @@
 namespace SimpleAOP\Advice;
 
 use AopJoinpoint;
-use SimpleAOP\Advice\Feature\AfterInterface;
+use SimpleAOP\Advice\Feature\AfterInterceptorInterface;
 
-abstract class After extends AbstractAdvice implements AfterInterface
+abstract class After extends AbstractAdvice implements AfterInterceptorInterface
 {
     /**
      * Advice callback
@@ -14,27 +14,27 @@ abstract class After extends AbstractAdvice implements AfterInterface
      */
     public function __invoke(AopJoinpoint $jp)
     {
-        // save the join point
-        $this->setJoinPoint($jp);
-        
         // check custom interceptor
-        $method = "after" . ucfirst($jp->getMethod());
+        $method = "after" . ucfirst($jp->getMethodName());
         if(method_exists($this, $method)) {
-            call_user_func_array(array($this, $method), array($jp->getReturnedValue()));
+            call_user_func_array(array($this, $method), array($jp));
             return $this;
         }
         
         // call generic interceptor
-        $return = $this->after($jp->getReturnedValue());
-        if(null != $return) {
-            $jp->setReturnedValue($return);
-        }
+        $this->after($jp);
         return $this;
     }
     
     /**
      * After advice
-     * @param mixed $return
+     * @param AopJoinpoint $jp
      */
-    abstract public function after($return);
+    abstract public function after(AopJoinpoint $jp);
+    
+    /**
+     * Get the point cut selector
+     * @return string
+     */
+    abstract public function getPointCut();
 }
