@@ -5,9 +5,16 @@ namespace SimpleAOP\Advice\Around;
 use AopJoinpoint;
 use SimpleAOP\Advice\AbstractAdvice;
 use SimpleAOP\Advice\Feature\AroundActionInterceptorInterface;
+use SimpleAOP\Advice\Feature\JoinPointAwareInterface;
 
-abstract class Action extends AbstractAdvice implements AroundActionInterceptorInterface
+abstract class Action extends AbstractAdvice implements AroundActionInterceptorInterface,
+    JoinPointAwareInterface
 {
+    /**
+     * @var AopJoinpoint
+     */
+    protected $joinPoint;
+
     /**
      * Advice callback
      * @param AopJoinpoint $jp
@@ -15,17 +22,41 @@ abstract class Action extends AbstractAdvice implements AroundActionInterceptorI
      */
     public function __invoke(AopJoinpoint $jp)
     {
+        // save the join point
+        $this->setJoinPoint($jp);
+
         // get the application request
         $request = $this->getServiceLocator()->get('Request');
 
         // check custom interceptor
         $method = "around" . ucfirst($jp->getMethodName());
         if(method_exists($this, $method)) {
-            call_user_func_array(array($this, $method), array($request, $jp));
-            return;
+            call_user_func_array(array($this, $method), array($jp->getMethodName(), $request));
+        } else {
+            // call generic interceptor
+            $return = $this->around($jp->getMethodName(), $request);
         }
+        if(null != $return) {
+            $jp->setReturnedValue($return);
+        }
+    }
 
-        // call generic interceptor
-        $this->around($request, $jp);
+    /**
+     * Get the join point
+     * @return AopJoinpoint
+     */
+    public function getJoinPoint()
+    {
+        return $this->joinPoint;
+    }
+
+    /**
+     * Set the joint point
+     * @param AopJoinpoint $jp
+     */
+    public function setJoinPoint(AopJoinpoint $jp)
+    {
+        $this->joinPoint = $jp;
+        return $this;
     }
 }

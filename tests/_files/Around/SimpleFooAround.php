@@ -1,24 +1,29 @@
 <?php
 
-namespace sample\Before\Simple;
+namespace sample\Around;
 
 use AopJoinpoint;
-use SimpleAOP\Advice\Before\Simple as Before;
+use SimpleAOP\Advice\Around\Simple as Around;
 
-class FooBefore extends Before
+class SimpleFooAround extends Around
 {
     /**
-     * Before advice
+     * Around advice
      * @param string $method
      * @param array $arguments
      * @param object $target
      */
-    public function before($method, array $arguments = array(), $target = null)
+    public function around($method, array $arguments = array(), $target = null)
     {
         if($method === 'foo') {
             $jp = $this->getJoinPoint();
             $jp->setArguments(array('before', 'intercepted'));
         }
+        
+        $jp->process();
+        $return = $jp->getReturnedValue();
+        
+        return  $return . " is overrided";
     }
     
     /**
@@ -27,6 +32,6 @@ class FooBefore extends Before
      */
     public function getPointCut()
     {
-        return 'sample\Before\Foo::foo()';
+        return 'sample\Around\Foo::foo()';
     }
 }

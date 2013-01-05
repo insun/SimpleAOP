@@ -7,7 +7,7 @@ use SimpleAOP\Aop;
 use sample;
 use Zend\ServiceManager\ServiceManager;
 
-class SimpleTest extends TestCase
+class ActionTest extends TestCase
 {
     protected $aop;
     protected $target;
@@ -21,21 +21,21 @@ class SimpleTest extends TestCase
 
     public function testCanInterceptAndChangeReturnValue()
     {
-        $result = $this->target->foo();
-        $this->assertEquals($result, "foo");
+        $result = $this->target->fooAction();
+        $this->assertEquals($result, array('attr' => 'foo'));
 
-        $this->aop->register(new sample\After\SimpleFooAfter());
-        $result = $this->target->foo();
+        $this->aop->register(new sample\After\ActionFooAfter());
+        $result = $this->target->fooAction();
         $this->assertEquals($result, "foo is overrided");
     }
 
     public function testCanInterceptAndChangeReturnValueInCustomeMethod()
     {
-        $result = $this->target->custom();
-        $this->assertEquals($result, "custom");
+        $result = $this->target->customAction();
+        $this->assertEquals($result, array('attr' => 'custom'));
 
-        $this->aop->register(new sample\After\SimpleFooAfter());
-        $result = $this->target->custom();
+        $this->aop->register(new sample\After\ActionFooAfter());
+        $result = $this->target->customAction();
         $this->assertEquals($result, "customisation in progress");
     }
 }

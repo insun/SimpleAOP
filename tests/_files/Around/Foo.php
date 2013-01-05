@@ -8,4 +8,9 @@ class Foo
     {
         return $arg1 . ' ' . $arg2;
     }
+    
+    public function fooAction()
+    {
+        return array('attr' => 'foo');
+    }
 }

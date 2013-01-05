@@ -1,11 +1,11 @@
 <?php
 
-namespace sample\After\Simple;
+namespace sample\After;
 
 use AopJoinpoint;
 use SimpleAOP\Advice\After\Simple as After;
 
-class FooAfter extends After
+class SimpleFooAfter extends After
 {
     /**
      * After advice for custom method

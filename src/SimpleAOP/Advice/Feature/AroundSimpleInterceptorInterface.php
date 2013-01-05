@@ -8,8 +8,10 @@ use SimpleAOP\Advice\AroundInterface;
 interface AroundSimpleInterceptorInterface extends AroundInterface
 {
     /**
-     * Around advice
-     * @param AopJoinpoint $jp
+     * Before advice
+     * @param string $method
+     * @param array $arguments
+     * @param object $target
      */
-    public function around(AopJoinpoint $jp);
+    public function around($method, array $arguments = array(), $target = null);
 }

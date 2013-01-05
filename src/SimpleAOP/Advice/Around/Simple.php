@@ -1,13 +1,13 @@
 <?php
 
-namespace SimpleAOP\Advice\Before;
+namespace SimpleAOP\Advice\Around;
 
 use AopJoinpoint;
 use SimpleAOP\Advice\AbstractAdvice;
-use SimpleAOP\Advice\Feature\BeforeActionInterceptorInterface;
+use SimpleAOP\Advice\Feature\AroundSimpleInterceptorInterface;
 use SimpleAOP\Advice\Feature\JoinPointAwareInterface;
 
-abstract class Action extends AbstractAdvice implements BeforeActionInterceptorInterface,
+abstract class Simple extends AbstractAdvice implements AroundSimpleInterceptorInterface,
     JoinPointAwareInterface
 {
     /**
@@ -25,18 +25,17 @@ abstract class Action extends AbstractAdvice implements BeforeActionInterceptorI
         // save the join point
         $this->setJoinPoint($jp);
 
-        // get the application request
-        $request = $this->getServiceLocator()->get('Request');
-
         // check custom interceptor
-        $method = "before" . ucfirst($jp->getMethodName());
+        $method = "around" . ucfirst($jp->getMethodName());
         if(method_exists($this, $method)) {
-            call_user_func_array(array($this, $method), array($jp->getMethodName(), $request));
-            return;
+            $return = call_user_func_array(array($this, $method), $jp->getArguments());
+        } else {
+            // call generic interceptor
+            $return = $this->around($jp->getMethodName(), $jp->getArguments(), $jp->getObject());
         }
-
-        // call generic interceptor
-        $this->before($jp->getMethodName(), $request);
+        if(null != $return) {
+            $jp->setReturnedValue($return);
+        }
     }
 
     /**

@@ -9,7 +9,8 @@ interface BeforeActionInterceptorInterface extends BeforeInterface
 {
     /**
      * Before advice
+     * @param string $action action name
      * @param RequestInterface $request
      */
-    public function before(RequestInterface $request);
+    public function before($action, RequestInterface $request);
 }

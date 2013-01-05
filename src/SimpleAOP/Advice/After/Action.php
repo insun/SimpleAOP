@@ -28,12 +28,14 @@ abstract class Action extends AbstractAdvice implements AfterActionInterceptorIn
         // check custom interceptor
         $method = "after" . ucfirst($jp->getMethodName());
         if(method_exists($this, $method)) {
-            call_user_func_array(array($this, $method), array($jp->getReturnedValue()));
-            return;
+            $return = call_user_func_array(array($this, $method), array($jp->getReturnedValue()));
+        } else {
+            // call generic interceptor
+            $return = $this->after($jp->getReturnedValue());
         }
-
-        // call generic interceptor
-        $this->after($jp->getReturnedValue());
+        if(null != $return) {
+            $jp->setReturnedValue($return);
+        }
     }
 
     /**

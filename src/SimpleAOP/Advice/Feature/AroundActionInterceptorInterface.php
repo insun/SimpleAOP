@@ -2,15 +2,15 @@
 
 namespace SimpleAOP\Advice\Feature;
 
-use AopJoinpoint;
 use SimpleAOP\Advice\AroundInterface;
+use Zend\Stdlib\RequestInterface;
 
 interface AroundActionInterceptorInterface extends AroundInterface
 {
     /**
-     * Around advice
+     * Before advice
+     * @param string $action action name
      * @param RequestInterface $request
-     * @param AopJoinpoint $jp
      */
-    public function around(RequestInterface $request, AopJoinpoint $jp);
+    public function around($action, RequestInterface $request);
 }

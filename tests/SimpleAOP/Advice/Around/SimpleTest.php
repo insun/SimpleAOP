@@ -1,6 +1,6 @@
 <?php
 
-namespace SimpleAOPTest\Advice\Before;
+namespace SimpleAOPTest\Advice\Around;
 
 use PHPUnit_Framework_TestCase as TestCase;
 use SimpleAOP\Aop;
@@ -16,7 +16,7 @@ class SimpleTest extends TestCase
     {
         $this->aop = new Aop();
         $this->aop->setServiceLocator(new ServiceManager());
-        $this->target = new sample\Before\Foo();
+        $this->target = new sample\Around\Foo();
     }
 
     public function testCanInterceptAndSetArguments()
@@ -24,8 +24,8 @@ class SimpleTest extends TestCase
         $result = $this->target->foo('zend', 'framework');
         $this->assertEquals($result, 'zend framework');
 
-        $this->aop->register(new sample\Before\SimpleFooBefore());
+        $this->aop->register(new sample\Around\SimpleFooAround());
         $result = $this->target->foo('zend', 'framework');
-        $this->assertEquals($result, 'before intercepted');
+        $this->assertEquals($result, 'before intercepted is overrided');
     }
 }
