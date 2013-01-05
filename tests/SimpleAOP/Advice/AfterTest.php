@@ -2,30 +2,17 @@
 
 namespace SimpleAOPTest\Advice;
 
-use PHPUnit_Framework_TestCase as TestCase;
-use SimpleAOP\Aop;
 use sample;
-use Zend\ServiceManager\ServiceManager;
 
-class AfterTest extends TestCase
+class AfterTest extends AbstractAdviceTest
 {
-    protected $aop;
-    protected $target;
-
-    public function setUp()
-    {
-        $this->aop = new Aop();
-        $this->aop->setServiceLocator(new ServiceManager());
-        $this->target = new sample\Business\After();
-    }
-
     public function testCanInterceptAndChangeReturnValue()
     {
-        $result = $this->target->foo();
+        $result = $this->target->foo("foo");
         $this->assertEquals($result, "foo");
 
         $this->aop->register(new sample\After());
-        $result = $this->target->foo();
+        $result = $this->target->foo("foo");
         $this->assertEquals($result, "foo is overrided");
     }
 
@@ -41,11 +28,11 @@ class AfterTest extends TestCase
 
     public function testCanInterceptWithMultiplePointCut()
     {
-        $result = $this->target->foo();
+        $result = $this->target->foo("foo");
         $this->assertEquals($result, "foo");
 
         $this->aop->register(new sample\After\Multiple());
-        $result = $this->target->foo();
+        $result = $this->target->foo("foo");
         $this->assertEquals($result, "foo is overrided");
         $result = $this->target->bar();
         $this->assertEquals($result, "bar is overrided");

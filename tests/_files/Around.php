@@ -31,6 +31,6 @@ class Around extends AroundAdvice
      */
     public function getPointCut()
     {
-        return 'sample\Business\Around::foo()';
+        return 'sample\Business::foo()';
     }
 }

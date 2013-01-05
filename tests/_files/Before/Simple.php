@@ -16,7 +16,7 @@ class Simple extends BeforeAdvice
     {
         if($method === 'foo') {
             $jp = $this->getJoinPoint();
-            $jp->setArguments(array('before', 'intercepted'));
+            $jp->setArguments(array('intercepted'));
         }
     }
     
@@ -26,6 +26,6 @@ class Simple extends BeforeAdvice
      */
     public function getPointCut()
     {
-        return 'sample\Business\Before::foo()';
+        return 'sample\Business::foo()';
     }
 }

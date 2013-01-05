@@ -24,6 +24,6 @@ class Action extends BeforeAdvice
      */
     public function getPointCut()
     {
-        return 'sample\Business\Before::*Action()';
+        return 'sample\Business::*Action()';
     }
 }

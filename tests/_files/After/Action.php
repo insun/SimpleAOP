@@ -30,6 +30,6 @@ class Action extends AfterAdvice
      */
     public function getPointCut()
     {
-        return 'sample\Business\After::*Action()';
+        return 'sample\Business::*Action()';
     }
 }

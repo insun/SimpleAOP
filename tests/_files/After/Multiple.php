@@ -22,6 +22,9 @@ class Multiple extends AfterAdvice
      */
     public function getPointCut()
     {
-        return array('sample\Business\After::foo()', 'sample\Business\After::bar()');
+        return array(
+            'sample\Business::foo()',
+            'sample\Business::bar()'
+        );
     }
 }

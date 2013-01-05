@@ -15,7 +15,7 @@ class Before extends BeforeAdvice
     public function before(AopJoinpoint $jp)
     {
         if($jp->getMethodName() === 'foo') {
-            $jp->setArguments(array('before', 'intercepted'));
+            $jp->setArguments(array('intercepted'));
         }
     }
     
@@ -25,6 +25,6 @@ class Before extends BeforeAdvice
      */
     public function getPointCut()
     {
-        return 'sample\Business\Before::foo()';
+        return 'sample\Business::foo()';
     }
 }

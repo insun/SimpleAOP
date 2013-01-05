@@ -2,24 +2,18 @@
 
 namespace SimpleAOPTest\Advice\Around;
 
-use PHPUnit_Framework_TestCase as TestCase;
-use SimpleAOP\Aop;
 use sample;
-use Zend\ServiceManager\ServiceManager;
+use SimpleAOPTest\Advice\AbstractAdviceTest;
 
-class ActionTest extends TestCase
+class ActionTest extends AbstractAdviceTest
 {
-    protected $aop;
-    protected $target;
     protected $request;
 
     public function setUp()
     {
-        $this->aop = new Aop();
-        $this->aop->setServiceLocator(new ServiceManager());
+        parent::setUp();
         $this->request = new \Zend\Http\Request();
         $this->aop->getServiceLocator()->setService('Request', $this->request);
-        $this->target = new sample\Business\Around();
     }
 
     public function testCanIntercept()

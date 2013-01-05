@@ -2,23 +2,11 @@
 
 namespace SimpleAOPTest\Advice\After;
 
-use PHPUnit_Framework_TestCase as TestCase;
-use SimpleAOP\Aop;
 use sample;
-use Zend\ServiceManager\ServiceManager;
+use SimpleAOPTest\Advice\AbstractAdviceTest;
 
-class ActionTest extends TestCase
+class ActionTest extends AbstractAdviceTest
 {
-    protected $aop;
-    protected $target;
-
-    public function setUp()
-    {
-        $this->aop = new Aop();
-        $this->aop->setServiceLocator(new ServiceManager());
-        $this->target = new sample\Business\After();
-    }
-
     public function testCanInterceptAndChangeReturnValue()
     {
         $result = $this->target->fooAction();

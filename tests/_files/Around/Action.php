@@ -41,6 +41,6 @@ class Action extends AroundAdvice
      */
     public function getPointCut()
     {
-        return 'sample\Business\Around::*Action()';
+        return 'sample\Business::*Action()';
     }
 }

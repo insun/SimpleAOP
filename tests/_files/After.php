@@ -33,6 +33,6 @@ class After extends AfterAdvice
      */
     public function getPointCut()
     {
-        return 'sample\Business\After::*()';
+        return 'sample\Business::*()';
     }
 }

@@ -2,30 +2,17 @@
 
 namespace SimpleAOPTest\Advice;
 
-use PHPUnit_Framework_TestCase as TestCase;
-use SimpleAOP\Aop;
 use sample;
-use Zend\ServiceManager\ServiceManager;
 
-class BeforeTest extends TestCase
+class BeforeTest extends AbstractAdviceTest
 {
-    protected $aop;
-    protected $target;
-
-    public function setUp()
-    {
-        $this->aop = new Aop();
-        $this->aop->setServiceLocator(new ServiceManager());
-        $this->target = new sample\Business\Before();
-    }
-
     public function testCanInterceptAndSetArguments()
     {
-        $result = $this->target->foo('zend', 'framework');
-        $this->assertEquals($result, 'zend framework');
+        $result = $this->target->foo('zend');
+        $this->assertEquals($result, 'zend');
 
         $this->aop->register(new sample\Before());
-        $result = $this->target->foo('zend', 'framework');
-        $this->assertEquals($result, 'before intercepted');
+        $result = $this->target->foo('zend');
+        $this->assertEquals($result, 'intercepted');
     }
 }

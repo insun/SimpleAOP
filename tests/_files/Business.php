@@ -1,22 +1,22 @@
 <?php
 
-namespace sample\Business;
+namespace sample;
 
-class After
+class Business
 {
     public function custom()
     {
         return "custom";
     }
     
-    public function customAction()
+    public function foo($arg)
     {
-        return array('attr' => 'custom');
+        return $arg;
     }
     
-    public function foo()
+    public function bar()
     {
-        return "foo";
+        return "bar";
     }
     
     public function fooAction()
@@ -24,8 +24,8 @@ class After
         return array('attr' => 'foo');
     }
     
-    public function bar()
+    public function customAction()
     {
-        return "bar";
+        return array('attr' => 'custom');
     }
 }
