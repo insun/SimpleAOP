@@ -24,7 +24,7 @@ class SimpleTest extends TestCase
         $result = $this->target->foo('zend', 'framework');
         $this->assertEquals($result, 'zend framework');
 
-        $this->aop->register(new sample\Around\SimpleFooAround());
+        $this->aop->register(new sample\Around\SimpleFoo());
         $result = $this->target->foo('zend', 'framework');
         $this->assertEquals($result, 'before intercepted is overrided');
     }

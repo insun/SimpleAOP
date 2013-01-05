@@ -30,7 +30,7 @@ class ActionTest extends TestCase
         $this->assertEquals($result, array('attr' => 'foo'));
         $this->assertEquals($this->request->getMetaData('param1'), 'bar');
 
-        $this->aop->register(new sample\Around\ActionFooAround());
+        $this->aop->register(new sample\Around\ActionFoo());
         $result = $this->target->fooAction();
         $this->assertEquals($result, "foo is overrided");
         $this->assertEquals($this->request->getMetaData('param1'), 'foo action is intercepted');

@@ -2,11 +2,10 @@
 
 namespace sample\Before;
 
-use AopJoinpoint;
 use SimpleAOP\Advice\Before\Action as Before;
 use Zend\Stdlib\RequestInterface;
 
-class ActionFooBefore extends Before
+class ActionFoo extends Before
 {
     /**
      * Before advice

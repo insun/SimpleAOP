@@ -29,7 +29,7 @@ class ActionTest extends TestCase
         $this->target->fooAction();
         $this->assertEquals($this->request->getMetaData('param1'), 'bar');
 
-        $this->aop->register(new sample\Before\ActionFooBefore());
+        $this->aop->register(new sample\Before\ActionFoo());
         $this->target->fooAction();
         $this->assertEquals($this->request->getMetaData('param1'), 'foo action is intercepted');
     }

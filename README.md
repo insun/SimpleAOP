@@ -24,17 +24,17 @@ Or use the config :
 ```php
 return array(
     'aop' => array(
-        'before',
+        'my_before',
         'other',
-        'around',
-        'after',
+        'controller_around',
+        'service_after',
     ),
     'aop_plugins' => array(
         'invokables' => array(
-            'before' => 'sample\Interceptor\MyBefore',
+            'my_before' => 'sample\Interceptor\MyBefore',
             'other_before' => 'path\to\OtherBefore',
-            'around' => 'sample\Interceptor\MyAround',
-            'after' => 'sample\Interceptor\MyAfter',
+            'controller_around' => 'sample\Interceptor\MyAround',
+            'service_after' => 'sample\Interceptor\MyAfter',
         ),
     ),
 );
@@ -75,7 +75,7 @@ class MyAfter extends After
     {
         return array(
             'path\to\my\class::*()',
-            'path\to\my\service::connect*('
+            'path\to\my\service::connect*()'
         );
     }
 }

@@ -5,7 +5,7 @@ namespace sample\Around;
 use SimpleAOP\Advice\Around\Action as Around;
 use Zend\Stdlib\RequestInterface;
 
-class ActionFooAround extends Around
+class ActionFoo extends Around
 {
     /**
      * Around advice

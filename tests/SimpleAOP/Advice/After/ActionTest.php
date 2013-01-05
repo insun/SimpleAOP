@@ -24,7 +24,7 @@ class ActionTest extends TestCase
         $result = $this->target->fooAction();
         $this->assertEquals($result, array('attr' => 'foo'));
 
-        $this->aop->register(new sample\After\ActionFooAfter());
+        $this->aop->register(new sample\After\ActionFoo());
         $result = $this->target->fooAction();
         $this->assertEquals($result, "foo is overrided");
     }
@@ -34,7 +34,7 @@ class ActionTest extends TestCase
         $result = $this->target->customAction();
         $this->assertEquals($result, array('attr' => 'custom'));
 
-        $this->aop->register(new sample\After\ActionFooAfter());
+        $this->aop->register(new sample\After\ActionFoo());
         $result = $this->target->customAction();
         $this->assertEquals($result, "customisation in progress");
     }

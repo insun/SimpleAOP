@@ -2,10 +2,9 @@
 
 namespace sample\After;
 
-use AopJoinpoint;
 use SimpleAOP\Advice\After\Simple as After;
 
-class SimpleFooAfter extends After
+class SimpleFoo extends After
 {
     /**
      * After advice for custom method

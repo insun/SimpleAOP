@@ -3,9 +3,8 @@
 namespace sample\After;
 
 use SimpleAOP\Advice\After\Action as After;
-use Zend\Stdlib\RequestInterface;
 
-class ActionFooAfter extends After
+class ActionFoo extends After
 {
     /**
      * After advice in controller

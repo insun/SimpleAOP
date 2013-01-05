@@ -24,7 +24,7 @@ class SimpleTest extends TestCase
         $result = $this->target->foo();
         $this->assertEquals($result, "foo");
 
-        $this->aop->register(new sample\After\SimpleFooAfter());
+        $this->aop->register(new sample\After\SimpleFoo());
         $result = $this->target->foo();
         $this->assertEquals($result, "foo is overrided");
     }
@@ -34,7 +34,7 @@ class SimpleTest extends TestCase
         $result = $this->target->custom();
         $this->assertEquals($result, "custom");
 
-        $this->aop->register(new sample\After\SimpleFooAfter());
+        $this->aop->register(new sample\After\SimpleFoo());
         $result = $this->target->custom();
         $this->assertEquals($result, "customisation in progress");
     }
