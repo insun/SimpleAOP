@@ -9,7 +9,7 @@ class Business
         return "custom";
     }
     
-    public function foo($arg)
+    public function mirror($arg)
     {
         return $arg;
     }

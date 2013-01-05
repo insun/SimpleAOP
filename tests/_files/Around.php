@@ -14,13 +14,13 @@ class Around extends AroundAdvice
      */
     public function around(AopJoinpoint $jp)
     {
-        if($jp->getMethodName() === 'foo') {
-            $jp->setArguments(array('before', 'intercepted'));
+        if($jp->getMethodName() === 'mirror') {
+            $jp->setArguments(array('intercepted'));
         }
         
         $jp->process();
         
-        if($jp->getMethodName() === 'foo') {
+        if($jp->getMethodName() === 'mirror') {
             $jp->setReturnedValue($jp->getReturnedValue() . " is overrided");
         }
     }
@@ -31,6 +31,6 @@ class Around extends AroundAdvice
      */
     public function getPointCut()
     {
-        return 'sample\Business::foo()';
+        return 'sample\Business::mirror()';
     }
 }

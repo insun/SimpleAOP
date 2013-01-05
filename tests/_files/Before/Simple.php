@@ -14,7 +14,7 @@ class Simple extends BeforeAdvice
      */
     public function before($method, array $arguments = array(), $target = null)
     {
-        if($method === 'foo') {
+        if($method === 'mirror') {
             $jp = $this->getJoinPoint();
             $jp->setArguments(array('intercepted'));
         }
@@ -26,6 +26,6 @@ class Simple extends BeforeAdvice
      */
     public function getPointCut()
     {
-        return 'sample\Business::foo()';
+        return 'sample\Business::mirror()';
     }
 }

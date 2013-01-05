@@ -9,11 +9,11 @@ class SimpleTest extends AbstractAdviceTest
 {
     public function testCanInterceptAndSetArguments()
     {
-        $result = $this->target->foo('zend');
+        $result = $this->target->mirror('zend');
         $this->assertEquals($result, 'zend');
 
         $this->aop->register(new sample\Around\Simple());
-        $result = $this->target->foo('zend');
+        $result = $this->target->mirror('zend');
         $this->assertEquals($result, 'before is overrided');
     }
 }

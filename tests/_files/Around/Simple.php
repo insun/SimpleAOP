@@ -14,8 +14,8 @@ class Simple extends AroundAdvice
      */
     public function around($method, array $arguments = array(), $target = null)
     {
-        if($method === 'foo') {
-            $jp = $this->getJoinPoint();
+        $jp = $this->getJoinPoint();
+        if($method === 'mirror') {
             $jp->setArguments(array('before', 'intercepted'));
         }
         
@@ -31,6 +31,6 @@ class Simple extends AroundAdvice
      */
     public function getPointCut()
     {
-        return 'sample\Business::foo()';
+        return 'sample\Business::mirror()';
     }
 }
