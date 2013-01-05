@@ -12,7 +12,7 @@ class Aop implements ServiceLocatorAwareInterface
      * @var ServiceLocatorInterface
      */
     protected $serviceLocator;
-    
+
     /**
      * Add an advice with the selector
      * @param \SimpleAOP\Advice\AdviceInterface|string $advice
@@ -23,17 +23,17 @@ class Aop implements ServiceLocatorAwareInterface
         if(is_string($advice)) {
             $advice = $this->getServiceLocator()->get($advice);
         }
-        
+
         if(!$advice instanceof Advice\AdviceInterface) {
             throw new Exception\InvalidArgumentException(sprintf(
                 'Advice must be an instance of %s\Advice\AdviceInterface', __NAMESPACE__
             ));
         }
-        
+
         if($advice instanceof ServiceLocatorAwareInterface) {
             $advice->setServiceLocator($this->serviceLocator);
         }
-        
+
         // register to provide a multi subscriptions
         $adviceRegister = function(Advice\AdviceInterface $advice, $register) {
             $pcs = $advice->getPointCut();
@@ -44,7 +44,7 @@ class Aop implements ServiceLocatorAwareInterface
                 call_user_func_array($register, array($pc, $advice));
             }
         };
-        
+
         switch(true) {
             case ($advice instanceof Advice\BeforeInterface) :
                 $adviceRegister($advice, 'aop_add_before');
@@ -62,7 +62,7 @@ class Aop implements ServiceLocatorAwareInterface
         }
         return $this;
     }
-    
+
     /**
      * Set service locator
      * @param ServiceLocatorInterface $serviceLocator

@@ -20,7 +20,7 @@ abstract class After extends AbstractAdvice implements AfterInterceptorInterface
             call_user_func_array(array($this, $method), array($jp));
             return;
         }
-        
+
         // call generic interceptor
         $this->after($jp);
     }

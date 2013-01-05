@@ -11,7 +11,7 @@ interface AdviceInterface
      * @param AopJoinpoint $jp
      */
     public function __invoke(AopJoinpoint $jp);
-    
+
     /**
      * Get the point cut selector
      * @return string

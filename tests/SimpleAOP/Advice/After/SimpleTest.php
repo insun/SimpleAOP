@@ -1,13 +1,13 @@
 <?php
 
-namespace SimpleAOPTest\Advice;
+namespace SimpleAOPTest\Advice\After;
 
 use PHPUnit_Framework_TestCase as TestCase;
 use SimpleAOP\Aop;
 use sample;
 use Zend\ServiceManager\ServiceManager;
 
-class AfterTest extends TestCase
+class SimpleTest extends TestCase
 {
     protected $aop;
     protected $target;
@@ -24,7 +24,7 @@ class AfterTest extends TestCase
         $result = $this->target->foo();
         $this->assertEquals($result, "foo");
 
-        $this->aop->register(new sample\After\FooAfter());
+        $this->aop->register(new sample\After\Simple\FooAfter());
         $result = $this->target->foo();
         $this->assertEquals($result, "foo is overrided");
     }
@@ -34,20 +34,8 @@ class AfterTest extends TestCase
         $result = $this->target->custom();
         $this->assertEquals($result, "custom");
 
-        $this->aop->register(new sample\After\FooAfter());
+        $this->aop->register(new sample\After\Simple\FooAfter());
         $result = $this->target->custom();
         $this->assertEquals($result, "customisation in progress");
-    }
-
-    public function testCanInterceptWithMultiplePointCut()
-    {
-        $result = $this->target->foo();
-        $this->assertEquals($result, "foo");
-
-        $this->aop->register(new sample\After\FooAfterMultiplePC());
-        $result = $this->target->foo();
-        $this->assertEquals($result, "foo is overrided");
-        $result = $this->target->bar();
-        $this->assertEquals($result, "bar is overrided");
     }
 }

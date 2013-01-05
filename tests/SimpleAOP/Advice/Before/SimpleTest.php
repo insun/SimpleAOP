@@ -1,13 +1,13 @@
 <?php
 
-namespace SimpleAOPTest\Advice;
+namespace SimpleAOPTest\Advice\Before;
 
 use PHPUnit_Framework_TestCase as TestCase;
 use SimpleAOP\Aop;
 use sample;
 use Zend\ServiceManager\ServiceManager;
 
-class BeforeTest extends TestCase
+class SimpleTest extends TestCase
 {
     protected $aop;
     protected $target;
@@ -24,7 +24,7 @@ class BeforeTest extends TestCase
         $result = $this->target->foo('zend', 'framework');
         $this->assertEquals($result, 'zend framework');
 
-        $this->aop->register(new sample\Before\FooBefore());
+        $this->aop->register(new sample\Before\Simple\FooBefore());
         $result = $this->target->foo('zend', 'framework');
         $this->assertEquals($result, 'before intercepted');
     }

@@ -11,7 +11,7 @@ interface JoinPointAwareInterface
      * @return AopJoinpoint
      */
     public function getJoinPoint();
-    
+
     /**
      * Set the joint point
      * @param AopJoinpoint $jp

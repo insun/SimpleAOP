@@ -12,7 +12,7 @@ abstract class AbstractAdvice implements ServiceLocatorAwareInterface, AdviceInt
      * @var ServiceLocatorInterface
      */
     protected $serviceLocator;
-    
+
     /**
      * Set service locator
      * @param ServiceLocatorInterface $serviceLocator

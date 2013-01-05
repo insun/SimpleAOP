@@ -20,7 +20,7 @@ abstract class Before extends AbstractAdvice implements BeforeInterceptorInterfa
             call_user_func_array(array($this, $method), $jp);
             return;
         }
-        
+
         // call generic interceptor
         $this->before($jp);
     }

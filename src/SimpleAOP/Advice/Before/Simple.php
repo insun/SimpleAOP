@@ -3,17 +3,18 @@
 namespace SimpleAOP\Advice\Before;
 
 use AopJoinpoint;
+use SimpleAOP\Advice\AbstractAdvice;
 use SimpleAOP\Advice\Feature\BeforeSimpleInterceptorInterface;
 use SimpleAOP\Advice\Feature\JoinPointAwareInterface;
 
-abstract class Simple extends AbstractAdvice implements BeforeSimpleInterceptorInterface, 
+abstract class Simple extends AbstractAdvice implements BeforeSimpleInterceptorInterface,
     JoinPointAwareInterface
 {
     /**
-     * @var AopJoinpoint 
+     * @var AopJoinpoint
      */
     protected $joinPoint;
-    
+
     /**
      * Advice callback
      * @param AopJoinpoint $jp
@@ -23,18 +24,18 @@ abstract class Simple extends AbstractAdvice implements BeforeSimpleInterceptorI
     {
         // save the join point
         $this->setJoinPoint($jp);
-        
+
         // check custom interceptor
         $method = "before" . ucfirst($jp->getMethodName());
         if(method_exists($this, $method)) {
             call_user_func_array(array($this, $method), $jp->getArguments());
             return;
         }
-        
+
         // call generic interceptor
-        $this->before($method, $jp->getArguments(), $jp->getObject());
+        $this->before($jp->getMethodName(), $jp->getArguments(), $jp->getObject());
     }
-    
+
     /**
      * Get the join point
      * @return AopJoinpoint
@@ -43,7 +44,7 @@ abstract class Simple extends AbstractAdvice implements BeforeSimpleInterceptorI
     {
         return $this->joinPoint;
     }
-    
+
     /**
      * Set the joint point
      * @param AopJoinpoint $jp
