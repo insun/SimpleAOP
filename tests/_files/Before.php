@@ -1,27 +1,21 @@
 <?php
 
-namespace sample\Around;
+namespace sample;
 
 use AopJoinpoint;
-use SimpleAOP\Advice\Around;
+use SimpleAOP\Advice\Before as BeforeAdvice;
 
-class FooAround extends Around
+class Before extends BeforeAdvice
 {
     /**
      * Advice callback
      * @param AopJoinpoint $jp
      * @return mixed
      */
-    public function around(AopJoinpoint $jp)
+    public function before(AopJoinpoint $jp)
     {
         if($jp->getMethodName() === 'foo') {
             $jp->setArguments(array('before', 'intercepted'));
-        }
-        
-        $jp->process();
-        
-        if($jp->getMethodName() === 'foo') {
-            $jp->setReturnedValue($jp->getReturnedValue() . " is overrided");
         }
     }
     
@@ -31,6 +25,6 @@ class FooAround extends Around
      */
     public function getPointCut()
     {
-        return 'sample\Around\Foo::foo()';
+        return 'sample\Business\Before::foo()';
     }
 }

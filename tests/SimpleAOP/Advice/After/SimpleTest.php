@@ -16,7 +16,7 @@ class SimpleTest extends TestCase
     {
         $this->aop = new Aop();
         $this->aop->setServiceLocator(new ServiceManager());
-        $this->target = new sample\After\Foo();
+        $this->target = new sample\Business\After();
     }
 
     public function testCanInterceptAndChangeReturnValue()
@@ -24,7 +24,7 @@ class SimpleTest extends TestCase
         $result = $this->target->foo();
         $this->assertEquals($result, "foo");
 
-        $this->aop->register(new sample\After\SimpleFoo());
+        $this->aop->register(new sample\After\Simple());
         $result = $this->target->foo();
         $this->assertEquals($result, "foo is overrided");
     }
@@ -34,7 +34,7 @@ class SimpleTest extends TestCase
         $result = $this->target->custom();
         $this->assertEquals($result, "custom");
 
-        $this->aop->register(new sample\After\SimpleFoo());
+        $this->aop->register(new sample\After\Simple());
         $result = $this->target->custom();
         $this->assertEquals($result, "customisation in progress");
     }

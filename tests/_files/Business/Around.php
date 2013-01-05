@@ -1,8 +1,8 @@
 <?php
 
-namespace sample\Around;
+namespace sample\Business;
 
-class Foo
+class Around
 {
     public function foo($arg1, $arg2)
     {

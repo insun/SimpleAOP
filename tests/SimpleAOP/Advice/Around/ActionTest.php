@@ -19,7 +19,7 @@ class ActionTest extends TestCase
         $this->aop->setServiceLocator(new ServiceManager());
         $this->request = new \Zend\Http\Request();
         $this->aop->getServiceLocator()->setService('Request', $this->request);
-        $this->target = new sample\Around\Foo();
+        $this->target = new sample\Business\Around();
     }
 
     public function testCanIntercept()
@@ -30,7 +30,7 @@ class ActionTest extends TestCase
         $this->assertEquals($result, array('attr' => 'foo'));
         $this->assertEquals($this->request->getMetaData('param1'), 'bar');
 
-        $this->aop->register(new sample\Around\ActionFoo());
+        $this->aop->register(new sample\Around\Action());
         $result = $this->target->fooAction();
         $this->assertEquals($result, "foo is overrided");
         $this->assertEquals($this->request->getMetaData('param1'), 'foo action is intercepted');

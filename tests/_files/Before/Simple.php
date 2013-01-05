@@ -1,28 +1,23 @@
 <?php
 
-namespace sample\Around;
+namespace sample\Before;
 
-use SimpleAOP\Advice\Around\Simple as Around;
+use SimpleAOP\Advice\Before\Simple as BeforeAdvice;
 
-class SimpleFoo extends Around
+class Simple extends BeforeAdvice
 {
     /**
-     * Around advice
+     * Before advice
      * @param string $method
      * @param array $arguments
      * @param object $target
      */
-    public function around($method, array $arguments = array(), $target = null)
+    public function before($method, array $arguments = array(), $target = null)
     {
         if($method === 'foo') {
             $jp = $this->getJoinPoint();
             $jp->setArguments(array('before', 'intercepted'));
         }
-        
-        $jp->process();
-        $return = $jp->getReturnedValue();
-        
-        return  $return . " is overrided";
     }
     
     /**
@@ -31,6 +26,6 @@ class SimpleFoo extends Around
      */
     public function getPointCut()
     {
-        return 'sample\Around\Foo::foo()';
+        return 'sample\Business\Before::foo()';
     }
 }

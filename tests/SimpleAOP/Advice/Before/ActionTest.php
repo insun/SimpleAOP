@@ -19,7 +19,7 @@ class ActionTest extends TestCase
         $this->aop->setServiceLocator(new ServiceManager());
         $this->request = new \Zend\Http\Request();
         $this->aop->getServiceLocator()->setService('Request', $this->request);
-        $this->target = new sample\Before\Foo();
+        $this->target = new sample\Business\Before();
     }
 
     public function testCanInterceptAndSetArguments()
@@ -29,7 +29,7 @@ class ActionTest extends TestCase
         $this->target->fooAction();
         $this->assertEquals($this->request->getMetaData('param1'), 'bar');
 
-        $this->aop->register(new sample\Before\ActionFoo());
+        $this->aop->register(new sample\Before\Action());
         $this->target->fooAction();
         $this->assertEquals($this->request->getMetaData('param1'), 'foo action is intercepted');
     }

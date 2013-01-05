@@ -1,11 +1,11 @@
 <?php
 
-namespace sample\After;
+namespace sample;
 
 use AopJoinpoint;
-use SimpleAOP\Advice\After;
+use SimpleAOP\Advice\After as AfterAdvice;
 
-class FooAfter extends After
+class After extends AfterAdvice
 {
     /**
      * After advice for custom method
@@ -33,6 +33,6 @@ class FooAfter extends After
      */
     public function getPointCut()
     {
-        return 'sample\After\Foo::*()';
+        return 'sample\Business\After::*()';
     }
 }

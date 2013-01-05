@@ -1,8 +1,8 @@
 <?php
 
-namespace sample\Before;
+namespace sample\Business;
 
-class Foo
+class Before
 {
     public function foo($arg1, $arg2)
     {

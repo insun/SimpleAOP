@@ -16,7 +16,7 @@ class SimpleTest extends TestCase
     {
         $this->aop = new Aop();
         $this->aop->setServiceLocator(new ServiceManager());
-        $this->target = new sample\Around\Foo();
+        $this->target = new sample\Business\Around();
     }
 
     public function testCanInterceptAndSetArguments()
@@ -24,7 +24,7 @@ class SimpleTest extends TestCase
         $result = $this->target->foo('zend', 'framework');
         $this->assertEquals($result, 'zend framework');
 
-        $this->aop->register(new sample\Around\SimpleFoo());
+        $this->aop->register(new sample\Around\Simple());
         $result = $this->target->foo('zend', 'framework');
         $this->assertEquals($result, 'before intercepted is overrided');
     }

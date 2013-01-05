@@ -1,8 +1,8 @@
 <?php
 
-namespace sample\After;
+namespace sample\Business;
 
-class Foo
+class After
 {
     public function custom()
     {

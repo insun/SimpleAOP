@@ -3,9 +3,9 @@
 namespace sample\After;
 
 use AopJoinpoint;
-use SimpleAOP\Advice\After;
+use SimpleAOP\Advice\After as AfterAdvice;
 
-class FooAfterMultiplePC extends After
+class Multiple extends AfterAdvice
 {
     /**
      * After advice
@@ -22,6 +22,6 @@ class FooAfterMultiplePC extends After
      */
     public function getPointCut()
     {
-        return array('sample\After\Foo::foo()', 'sample\After\Foo::bar()');
+        return array('sample\Business\After::foo()', 'sample\Business\After::bar()');
     }
 }

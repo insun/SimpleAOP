@@ -16,7 +16,7 @@ class AroundTest extends TestCase
     {
         $this->aop = new Aop();
         $this->aop->setServiceLocator(new ServiceManager());
-        $this->target = new sample\Around\Foo();
+        $this->target = new sample\Business\Around();
     }
 
     public function testCanInterceptAndChangeReturnValue()
@@ -24,7 +24,7 @@ class AroundTest extends TestCase
         $result = $this->target->foo('zend', 'framework');
         $this->assertEquals($result, "zend framework");
 
-        $this->aop->register(new sample\Around\FooAround());
+        $this->aop->register(new sample\Around());
         $result = $this->target->foo('zend', 'framework');
         $this->assertEquals($result, "before intercepted is overrided");
     }

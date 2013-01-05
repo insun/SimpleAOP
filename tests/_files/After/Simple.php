@@ -2,9 +2,9 @@
 
 namespace sample\After;
 
-use SimpleAOP\Advice\After\Simple as After;
+use SimpleAOP\Advice\After\Simple as AfterAdvice;
 
-class SimpleFoo extends After
+class Simple extends AfterAdvice
 {
     /**
      * After advice for custom method
@@ -30,6 +30,6 @@ class SimpleFoo extends After
      */
     public function getPointCut()
     {
-        return 'sample\After\Foo::*()';
+        return 'sample\Business\After::*()';
     }
 }

@@ -2,10 +2,10 @@
 
 namespace sample\Around;
 
-use SimpleAOP\Advice\Around\Action as Around;
+use SimpleAOP\Advice\Around\Action as AroundAdvice;
 use Zend\Stdlib\RequestInterface;
 
-class ActionFoo extends Around
+class Action extends AroundAdvice
 {
     /**
      * Around advice
@@ -41,6 +41,6 @@ class ActionFoo extends Around
      */
     public function getPointCut()
     {
-        return 'sample\Around\Foo::*Action()';
+        return 'sample\Business\Around::*Action()';
     }
 }

@@ -2,10 +2,10 @@
 
 namespace sample\Before;
 
-use SimpleAOP\Advice\Before\Action as Before;
+use SimpleAOP\Advice\Before\Action as BeforeAdvice;
 use Zend\Stdlib\RequestInterface;
 
-class ActionFoo extends Before
+class Action extends BeforeAdvice
 {
     /**
      * Before advice
@@ -24,6 +24,6 @@ class ActionFoo extends Before
      */
     public function getPointCut()
     {
-        return 'sample\Before\Foo::*Action()';
+        return 'sample\Business\Before::*Action()';
     }
 }
