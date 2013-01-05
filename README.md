@@ -16,7 +16,7 @@ The first step is to configure your AOP module. Register your advice :
 
 ```php
 $aop = $this->getServiceLocator()->get('aop');
-$aop->register('MyBusiness::*()', new MyBeforeAdvice());
+$aop->register(new MyBeforeAdvice());
 ```
 
 Or use the config :
