@@ -10,7 +10,7 @@ abstract class Before extends AbstractAdvice implements BeforeInterceptorInterfa
     /**
      * Advice callback
      * @param AopJoinpoint $jp
-     * @return AbstractAdvice
+     * @return mixed
      */
     public function __invoke(AopJoinpoint $jp)
     {
@@ -18,23 +18,10 @@ abstract class Before extends AbstractAdvice implements BeforeInterceptorInterfa
         $method = "before" . ucfirst($jp->getMethodName());
         if(method_exists($this, $method)) {
             call_user_func_array(array($this, $method), $jp);
-            return $this;
+            return;
         }
         
         // call generic interceptor
         $this->before($jp);
-        return $this;
     }
-    
-    /**
-     * Before advice
-     * @param AopJoinpoint $jp
-     */
-    abstract public function before(AopJoinpoint $jp);
-    
-    /**
-     * Get the point cut selector
-     * @return string
-     */
-    abstract public function getPointCut();
 }

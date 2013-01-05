@@ -4,6 +4,7 @@ namespace SimpleAOP\Advice;
 
 use AopJoinpoint;
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
+use Zend\ServiceManager\ServiceLocatorInterface;
 
 abstract class AbstractAdvice implements ServiceLocatorAwareInterface, AdviceInterface
 {
@@ -12,19 +13,6 @@ abstract class AbstractAdvice implements ServiceLocatorAwareInterface, AdviceInt
      */
     protected $serviceLocator;
     
-    /**
-     * Advice callback
-     * @param AopJoinpoint $jp
-     * @return AbstractAdvice
-     */
-    abstract public function __invoke(AopJoinpoint $jp);
-    
-    /**
-     * Get the point cut selector
-     * @return string
-     */
-    abstract public function getPointCut();
-        
     /**
      * Set service locator
      * @param ServiceLocatorInterface $serviceLocator

@@ -10,7 +10,7 @@ abstract class After extends AbstractAdvice implements AfterInterceptorInterface
     /**
      * Advice callback
      * @param AopJoinpoint $jp
-     * @return AbstractAdvice
+     * @return mixed
      */
     public function __invoke(AopJoinpoint $jp)
     {
@@ -18,23 +18,10 @@ abstract class After extends AbstractAdvice implements AfterInterceptorInterface
         $method = "after" . ucfirst($jp->getMethodName());
         if(method_exists($this, $method)) {
             call_user_func_array(array($this, $method), array($jp));
-            return $this;
+            return;
         }
         
         // call generic interceptor
         $this->after($jp);
-        return $this;
     }
-    
-    /**
-     * After advice
-     * @param AopJoinpoint $jp
-     */
-    abstract public function after(AopJoinpoint $jp);
-    
-    /**
-     * Get the point cut selector
-     * @return string
-     */
-    abstract public function getPointCut();
 }

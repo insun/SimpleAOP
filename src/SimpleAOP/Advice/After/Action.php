@@ -17,7 +17,7 @@ abstract class Action extends AbstractAdvice implements AfterActionInterceptorIn
     /**
      * Advice callback
      * @param AopJoinpoint $jp
-     * @return AbstractAdvice
+     * @return mixed
      */
     public function __invoke(AopJoinpoint $jp)
     {
@@ -28,22 +28,12 @@ abstract class Action extends AbstractAdvice implements AfterActionInterceptorIn
         $method = "after" . ucfirst($jp->getMethodName());
         if(method_exists($this, $method)) {
             call_user_func_array(array($this, $method), array($jp->getReturnedValue()));
-            return $this;
+            return;
         }
         
         // call generic interceptor
-        $return = $this->after($jp->getReturnedValue());
-        if(null != $return) {
-            $jp->setReturnedValue($return);
-        }
-        return $this;
+        $this->after($jp->getReturnedValue());
     }
-    
-    /**
-     * After advice in controller
-     * @param null|ModelInterface $model
-     */
-    public function after($model);
     
     /**
      * Get the join point

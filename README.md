@@ -9,10 +9,107 @@ Introduction
 Simple AOP is a ZF2 module which use the [PHP AOP extension](https://github.com/AOP-PHP/AOP).
 It's an additional solution to use AOP with PHP. This project can be an alternative of the excellent [Go! framework](https://github.com/lisachenko/go-aop-php).
 
-Usage in ZF2
+Configuration
 ------------
 
-The first step is the creation of your advice :
+The first step is to configure your AOP module. Register your advice :
+
+```php
+$aop = $this->getServiceLocator()->get('aop');
+$aop->register('MyBusiness::*()', new MyBeforeAdvice());
+```
+
+Or use the config :
+
+```php
+return array(
+    'aop' => array(
+        'before',
+        'other',
+        'around',
+        'after',
+    ),
+    'aop_plugins' => array(
+        'invokables' => array(
+            'before' => 'sample\Interceptor\MyBefore',
+            'other_before' => 'path\to\OtherBefore',
+            'around' => 'sample\Interceptor\MyAround',
+            'after' => 'sample\Interceptor\MyAfter',
+        ),
+    ),
+);
+```
+
+You can use the "aop_plugins" entry or use the SimpleAOP\Feature\AOPPluginsProviderInterface in your Module.php.
+
+In the configuration, you must define all your interceptor. The selector will be defined in the method by the getPointCut method :
+
+```php
+class MyAfter extends After
+{
+    // define here your advice
+
+    /**
+     * Get the point cut selector
+     * @return string
+     */
+    public function getPointCut()
+    {
+        return 'path\to\my\class::*()';
+    }
+}
+```
+
+You can use an array if necessary :
+
+```php
+class MyAfter extends After
+{
+    // define here your advice
+
+    /**
+     * Get the point cut selector
+     * @return string
+     */
+    public function getPointCut()
+    {
+        return array(
+            'path\to\my\class::*()',
+            'path\to\my\service::connect*('
+        );
+    }
+}
+```
+
+Basic usage
+------------
+
+The basic usage use classic advice. An exemple
+with a before advice :
+
+```php
+use SimpleAOP\Advice\Before as BeforeAdvice;
+
+class MyBeforeAdvice extends BeforeAdvice
+{
+    public function beforeFoo(AopJoinpoint $jp)
+    {
+        // here a custom advice to intercept the foo method
+    }
+
+    public function before(AopJoinpoint $jp)
+    {
+        // here a generic advice, all methods which not override with custom interceptor
+        // will be intercepted here
+    }
+}
+```
+
+Usage with formatted advice
+------------
+
+An other usage format the arguments to have pretty advice. An exemple
+with a before advice :
 
 ```php
 use SimpleAOP\Advice\Before\Simple as BeforeAdvice;
@@ -32,41 +129,11 @@ class MyBeforeAdvice extends BeforeAdvice
 }
 ```
 
-On your own business class :
-
-```php
-class MyBusiness
-{
-    public function foo($arg1, $arg2)
-    {
-        // your code
-    }
-}
-```
-
-Register your advice :
-
-```php
-$aop = $this->getServiceLocator()->get('aop');
-$aop->register('MyBusiness::*()', new MyBeforeAdvice());
-```
-
-Or use the config :
-
-```php
-return array(
-    'aop' => array(
-        'Foo::foo()' => 'mock\FooBefore',
-    ),
-);
-```
-
-All the advices have access to the service locator & the current join point.
-
-Usage with the controllers
+Usage with the ZF2 controllers
 ------------
 
-Controllers have specials advices :
+The usage with ZF2 controllers format the arguments to provide request object. An exemple
+with a before advice :
 
 ```php
 use SimpleAOP\Advice\Before\Action as BeforeAdvice;
@@ -87,3 +154,8 @@ class MyBeforeAdvice extends BeforeAdvice
 
 The action methods have no parameters, but the application request is passed in 
 argument to make life easier for developer.
+
+TODO
+------------
+* AOP plugin manager is in progress
+* tests are in progress

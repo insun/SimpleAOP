@@ -1,11 +1,21 @@
 <?php
 
-namespace mock;
+namespace sample\After;
 
+use AopJoinpoint;
 use SimpleAOP\Advice\After;
 
 class FooAfter extends After
 {
+    /**
+     * After advice for custom method
+     * @param AopJoinpoint $jp
+     */
+    public function afterCustom(AopJoinpoint $jp)
+    {
+        $jp->setReturnedValue("customisation in progress");
+    }
+    
     /**
      * After advice
      * @param AopJoinpoint $jp
@@ -13,7 +23,7 @@ class FooAfter extends After
     public function after(AopJoinpoint $jp)
     {
         if($jp->getReturnedValue() === "foo") {
-            return "bar";
+            $jp->setReturnedValue($jp->getReturnedValue() . " is overrided");
         }
     }
     
@@ -23,6 +33,6 @@ class FooAfter extends After
      */
     public function getPointCut()
     {
-        return 'mock\After\Foo::foo()';
+        return 'sample\After\Foo::*()';
     }
 }

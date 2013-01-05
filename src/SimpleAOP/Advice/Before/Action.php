@@ -17,7 +17,7 @@ abstract class Simple extends AbstractAdvice implements BeforeActionInterceptorI
     /**
      * Advice callback
      * @param AopJoinpoint $jp
-     * @return AbstractAdvice
+     * @return mixed
      */
     public function __invoke(AopJoinpoint $jp)
     {
@@ -31,19 +31,12 @@ abstract class Simple extends AbstractAdvice implements BeforeActionInterceptorI
         $method = "before" . ucfirst($jp->getMethodName());
         if(method_exists($this, $method)) {
             call_user_func_array(array($this, $method), $request);
-            return $this;
+            return;
         }
         
         // call generic interceptor
         $this->before($method, $request);
-        return $this;
     }
-    
-    /**
-     * Before advice
-     * @param RequestInterface $request
-     */
-    public function before(RequestInterface $request);
     
     /**
      * Get the join point

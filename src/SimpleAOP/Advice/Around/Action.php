@@ -10,7 +10,7 @@ abstract class Action extends AbstractAdvice implements AroundActionInterceptorI
     /**
      * Advice callback
      * @param AopJoinpoint $jp
-     * @return AbstractAdvice
+     * @return mixed
      */
     public function __invoke(AopJoinpoint $jp)
     {
@@ -21,18 +21,10 @@ abstract class Action extends AbstractAdvice implements AroundActionInterceptorI
         $method = "around" . ucfirst($jp->getMethodName());
         if(method_exists($this, $method)) {
             call_user_func_array(array($this, $method), array($request, $jp));
-            return $this;
+            return;
         }
         
         // call generic interceptor
         $this->around($request, $jp);
-        return $this;
     }
-    
-    /**
-     * Around advice
-     * @param RequestInterface $request
-     * @param AopJoinpoint $jp
-     */
-    abstract public function around(RequestInterface $request, AopJoinpoint $jp);
 }

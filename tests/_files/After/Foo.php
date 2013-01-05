@@ -1,9 +1,14 @@
 <?php
 
-namespace mock\After;
+namespace sample\After;
 
 class Foo
 {
+    public function custom()
+    {
+        return "custom";
+    }
+    
     public function foo()
     {
         return "foo";
@@ -11,11 +16,6 @@ class Foo
     
     public function bar()
     {
-        
-    }
-    
-    public function baz()
-    {
-        
+        return "bar";
     }
 }

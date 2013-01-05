@@ -3,6 +3,7 @@
 namespace SimpleAOP;
 
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
+use Zend\ServiceManager\ServiceLocatorInterface;
 use Zend\Stdlib\Exception;
 
 class Aop implements ServiceLocatorAwareInterface
@@ -33,15 +34,26 @@ class Aop implements ServiceLocatorAwareInterface
             $advice->setServiceLocator($this->serviceLocator);
         }
         
+        // register to provide a multi subscriptions
+        $adviceRegister = function(Advice\AdviceInterface $advice, $register) {
+            $pcs = $advice->getPointCut();
+            if(!is_array($pcs)) {
+                $pcs = array($pcs);
+            }
+            foreach($pcs as $pc) {
+                call_user_func_array($register, array($pc, $advice));
+            }
+        };
+        
         switch(true) {
             case ($advice instanceof Advice\BeforeInterface) :
-                aop_add_before($advice->getPointCut(), $advice);
+                $adviceRegister($advice, 'aop_add_before');
                 break;
             case ($advice instanceof Advice\AfterInterface) :
-                aop_add_after($advice->getPointCut(), $advice);
+                $adviceRegister($advice, 'aop_add_after');
                 break;
             case ($advice instanceof Advice\AroundInterface) :
-                aop_add_around($advice->getPointCut(), $advice);
+                $adviceRegister($advice, 'aop_add_around');
                 break;
             default:
                 throw new Exception\InvalidArgumentException(sprintf(
