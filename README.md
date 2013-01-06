@@ -68,7 +68,7 @@ class ControllerCheckParams extends BeforeAdvice
 
     public function getPointCut()
     {
-        return 'path\to\UserController::updateAction(); 
+        return 'path\to\UserController::updateAction()'; 
     }
 }
 
@@ -251,7 +251,7 @@ class MyBeforeAdvice extends BeforeAdvice
 
     public function getPointCut()
     {
-        return 'path\to\my\controller::*Action(); // you can easily filter by action
+        return 'path\to\my\controller::*Action()'; // you can easily filter by action
     }
 }
 ```
