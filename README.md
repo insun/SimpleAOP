@@ -1,7 +1,7 @@
 ZF2 AOP module
 ============
 
-Version 3.1.0 Created by [Vincent Blanchon](http://developpeur-zend-framework.fr/)
+Version 3.1.1 Created by [Vincent Blanchon](http://developpeur-zend-framework.fr/)
 
 Introduction
 ------------
