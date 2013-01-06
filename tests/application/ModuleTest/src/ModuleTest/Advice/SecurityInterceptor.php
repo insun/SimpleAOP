@@ -1,6 +1,6 @@
 <?php
 
-namespace Foo\Advice;
+namespace ModuleTest\Advice;
 
 use SimpleAOP\Advice\Before\Action as BeforeAdvice;
 use Zend\Stdlib\RequestInterface;

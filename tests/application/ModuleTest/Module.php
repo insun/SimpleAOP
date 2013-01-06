@@ -1,6 +1,6 @@
 <?php
 
-namespace Foo;
+namespace ModuleTest;
 
 use SimpleAOP\Feature\AopPluginProviderInterface;
 
@@ -10,7 +10,7 @@ class Module implements AopPluginProviderInterface
     {
         return array(
             'invokables' => array(
-                'security_interceptor' => 'Foo\Advice\SecurityInterceptor',
+                'security_interceptor' => 'ModuleTest\Advice\SecurityInterceptor',
             ),
         );
     }

@@ -1,7 +1,7 @@
 ZF2 AOP module
 ============
 
-Version 0.0.1 Created by [Vincent Blanchon](http://developpeur-zend-framework.fr/)
+Version 3.0.0 Created by [Vincent Blanchon](http://developpeur-zend-framework.fr/)
 
 Introduction
 ------------
@@ -12,7 +12,15 @@ It's an additional solution to use AOP with PHP. This project can be an alternat
 Configuration
 ------------
 
-The first step is to configure your AOP module. Register your advice :
+The first step is to configure your application for SimpleAOP. Just add in your application.config.php :
+
+```php
+$aop = $this->getServiceLocator()->get('aop');
+$aop->register(new MyBeforeAdvice());
+```
+
+
+Register your advice :
 
 ```php
 $aop = $this->getServiceLocator()->get('aop');
@@ -154,8 +162,3 @@ class MyBeforeAdvice extends BeforeAdvice
 
 The action methods have no parameters, but the application request is passed in 
 argument to make life easier for developer.
-
-TODO
-------------
-* AOP plugin manager is in progress
-* tests are in progress
