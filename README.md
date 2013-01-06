@@ -137,6 +137,28 @@ class MyBeforeAdvice extends BeforeAdvice
 }
 ```
 
+An exemple with a after advice :
+`
+```php
+use SimpleAOP\Advice\After\Simple as AfterAdvice;
+
+class MyAfterAdvice extends AfterAdvice
+{
+    public function afterFoo($return)
+    {
+        // here a custom advice to intercept the foo method
+
+        return 'new value'; // new value will be automatically override the foo() returned value
+    }
+
+    public function after($return)
+    {
+        // here a generic advice, all methods which not override with custom interceptor
+        // will be intercepted here
+    }
+}
+```
+
 Usage with the ZF2 controllers
 ------------
 
