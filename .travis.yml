@@ -10,7 +10,8 @@ before_script:
   - echo "aop.so" >> `php --ini | grep "Loaded Configuration" | sed -e "s|.*:\s*||"`
   - curl -s http://getcomposer.org/installer | php
   - php composer.phar install
-  
+  - ls
+ 
 script:
   - cd tests
   - phpunit --process-isolation --bootstrap bootstrap.travis.php .
