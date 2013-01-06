@@ -15,8 +15,8 @@ class AopFactory implements FactoryInterface
         if(!isset($config['aop'])) {
             return $aop;
         }
-        foreach($config['aop'] as $selector => $advice) {
-            $aop->register($selector, $advice);
+        foreach($config['aop'] as $aspect) {
+            $aop->register($aspect);
         }
         return $aop;
     }

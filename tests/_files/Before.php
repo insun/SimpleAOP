@@ -3,9 +3,9 @@
 namespace sample;
 
 use AopJoinpoint;
-use SimpleAOP\Advice\Before as BeforeAdvice;
+use SimpleAOP\Aspect\Before as BeforeAspect;
 
-class Before extends BeforeAdvice
+class Before extends BeforeAspect
 {
     /**
      * Advice callback

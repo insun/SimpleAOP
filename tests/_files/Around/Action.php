@@ -2,10 +2,10 @@
 
 namespace sample\Around;
 
-use SimpleAOP\Advice\Around\Action as AroundAdvice;
+use SimpleAOP\Aspect\Around\Action as AroundAspect;
 use Zend\Stdlib\RequestInterface;
 
-class Action extends AroundAdvice
+class Action extends AroundAspect
 {
     /**
      * Around advice

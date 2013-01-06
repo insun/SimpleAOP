@@ -2,9 +2,9 @@
 
 namespace sample\Around;
 
-use SimpleAOP\Advice\Around\Simple as AroundAdvice;
+use SimpleAOP\Aspect\Around\Simple as AroundAspect;
 
-class Simple extends AroundAdvice
+class Simple extends AroundAspect
 {
     /**
      * Around advice

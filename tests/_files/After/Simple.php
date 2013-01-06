@@ -2,9 +2,9 @@
 
 namespace sample\After;
 
-use SimpleAOP\Advice\After\Simple as AfterAdvice;
+use SimpleAOP\Aspect\After\Simple as AfterAspect;
 
-class Simple extends AfterAdvice
+class Simple extends AfterAspect
 {
     /**
      * After advice for custom method

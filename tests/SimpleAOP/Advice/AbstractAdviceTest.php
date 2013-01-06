@@ -1,13 +1,13 @@
 <?php
 
-namespace SimpleAOPTest\Advice;
+namespace SimpleAOPTest\Aspect;
 
 use PHPUnit_Framework_TestCase as TestCase;
 use SimpleAOP\Aop;
 use sample;
 use Zend\ServiceManager\ServiceManager;
 
-abstract class AbstractAdviceTest extends TestCase
+abstract class AbstractAspectTest extends TestCase
 {
     protected $aop;
     protected $target;

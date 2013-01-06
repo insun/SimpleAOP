@@ -3,9 +3,9 @@
 namespace sample;
 
 use AopJoinpoint;
-use SimpleAOP\Advice\Around as AroundAdvice;
+use SimpleAOP\Aspect\Around as AroundAspect;
 
-class Around extends AroundAdvice
+class Around extends AroundAspect
 {
     /**
      * Advice callback

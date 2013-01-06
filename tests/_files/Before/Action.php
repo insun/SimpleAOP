@@ -2,10 +2,10 @@
 
 namespace sample\Before;
 
-use SimpleAOP\Advice\Before\Action as BeforeAdvice;
+use SimpleAOP\Aspect\Before\Action as BeforeAspect;
 use Zend\Stdlib\RequestInterface;
 
-class Action extends BeforeAdvice
+class Action extends BeforeAspect
 {
     /**
      * Before advice

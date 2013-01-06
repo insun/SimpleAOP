@@ -1,10 +1,10 @@
 <?php
 
-namespace SimpleAOPTest\Advice;
+namespace SimpleAOPTest\Aspect;
 
 use sample;
 
-class AroundTest extends AbstractAdviceTest
+class AroundTest extends AbstractAspectTest
 {
     public function testCanInterceptAndChangeReturnValue()
     {

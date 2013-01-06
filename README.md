@@ -48,9 +48,9 @@ public function updateAction($userId = null)
 ```
 
 ```php
-use SimpleAOP\Advice\Before\Action as BeforeAdvice;
+use SimpleAOP\Aspect\Before\Action as BeforeAspect;
 
-class ControllerCheckParams extends BeforeAdvice
+class ControllerCheckParams extends BeforeAspect
 {
     public function beforeUpdateAction($request, $mvcEvent)
     {
@@ -86,19 +86,28 @@ Configuration
 The first step is to configure your application for SimpleAOP. Just add in your application.config.php :
 
 ```php
-$aop = $this->getServiceLocator()->get('aop');
-$aop->register(new MyBeforeAdvice());
+return array(
+    'modules' => array(
+        'SimpleAOP', // enable your module
+    ),
+    // provide interface to configure your AOP
+    'service_listener_options' => array(
+        array(
+            'service_manager' => 'AspectPluginManager',
+            'config_key' => 'aop_aspects',
+            'interface' => 'SimpleAOP\Feature\AopAspectProviderInterface',
+            'method' => 'getAopAspectConfig',
+        ),
+    ),
+    'service_manager' => array(
+        'invokables' => array(
+            'AspectPluginManager' => 'SimpleAOP\AspectPluginManager',
+        ),
+    ),
+);
 ```
 
-
-Register your advice :
-
-```php
-$aop = $this->getServiceLocator()->get('aop');
-$aop->register(new MyBeforeAdvice());
-```
-
-Or use the config :
+Register with the config :
 
 ```php
 return array(
@@ -108,7 +117,7 @@ return array(
         'controller_around',
         'service_after',
     ),
-    'aop_plugins' => array(
+    'aop_aspects' => array(
         'invokables' => array(
             'my_before' => 'sample\Interceptor\MyBefore',
             'other_before' => 'path\to\OtherBefore',
@@ -119,7 +128,14 @@ return array(
 );
 ```
 
-You can use the "aop_plugins" entry or use the SimpleAOP\Feature\AopPluginProviderInterface in your Module.php.
+Or in your code :
+
+```php
+$aop = $this->getServiceLocator()->get('aop');
+$aop->register(new MyBeforeAspect());
+```
+
+You can use the "aop_aspects" entry or use the SimpleAOP\Feature\AopAspectProviderInterface in your Module.php.
 
 In the configuration, you must define all your interceptor. The selector will be defined in the method by the getPointCut method :
 
@@ -163,13 +179,13 @@ class MyAfter extends After
 Basic usage
 ------------
 
-The basic usage use classic advice. An exemple
-with a before advice :
+The basic usage use classic aspect. An exemple
+with a before joint point :
 
 ```php
-use SimpleAOP\Advice\Before as BeforeAdvice;
+use SimpleAOP\Aspect\Before as BeforeAspect;
 
-class MyBeforeAdvice extends BeforeAdvice
+class MyBeforeAspect extends BeforeAspect
 {
     public function beforeFoo(AopJoinpoint $jp)
     {
@@ -188,12 +204,12 @@ Usage with formatted advice
 ------------
 
 An other usage format the arguments to have pretty advice. An exemple
-with a before advice :
+with a before joint point :
 
 ```php
-use SimpleAOP\Advice\Before\Simple as BeforeAdvice;
+use SimpleAOP\Aspect\Before\Simple as BeforeAspect;
 
-class MyBeforeAdvice extends BeforeAdvice
+class MyBeforeAspect extends BeforeAspect
 {
     public function beforeFoo($arg1, $arg2)
     {
@@ -208,12 +224,12 @@ class MyBeforeAdvice extends BeforeAdvice
 }
 ```
 
-An exemple with a after advice :
+An exemple with a after joint point :
 `
 ```php
-use SimpleAOP\Advice\After\Simple as AfterAdvice;
+use SimpleAOP\Aspect\After\Simple as AfterAspect;
 
-class MyAfterAdvice extends AfterAdvice
+class MyAfterAspect extends AfterAspect
 {
     public function afterFoo($return)
     {
@@ -234,19 +250,19 @@ Usage with the ZF2 controllers
 ------------
 
 The usage with ZF2 controllers format the arguments to provide request object. An exemple
-with a before advice :
+with a before before joint point :
 
 ```php
-use SimpleAOP\Advice\Before\Action as BeforeAdvice;
+use SimpleAOP\Aspect\Before\Action as BeforeAspect;
 
-class MyBeforeAdvice extends BeforeAdvice
+class MyBeforeAspect extends BeforeAspect
 {
-    public function beforeFooAction($request)
+    public function beforeFooAction($request, $mvcEvent)
     {
         // here a custom advice to intercept the fooaction action method
     }
 
-    public function before($request)
+    public function before($request, $mvcEvent)
     {
         // here a generic advice to intercept all other methods
     }

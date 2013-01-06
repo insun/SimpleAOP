@@ -13,15 +13,15 @@ return array(
     ),
     'service_listener_options' => array(
         array(
-            'service_manager' => 'AdvicePluginManager',
-            'config_key' => 'aop_plugins',
-            'interface' => 'SimpleAOP\Feature\AopPluginProviderInterface',
-            'method' => 'getAopPluginConfig',
+            'service_manager' => 'AspectPluginManager',
+            'config_key' => 'aop_aspects',
+            'interface' => 'SimpleAOP\Feature\AopAspectProviderInterface',
+            'method' => 'getAopAspectConfig',
         ),
     ),
     'service_manager' => array(
         'invokables' => array(
-            'AdvicePluginManager' => 'SimpleAOP\AdvicePluginManager',
+            'AspectPluginManager' => 'SimpleAOP\AspectPluginManager',
         ),
     ),
 );

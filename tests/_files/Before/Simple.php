@@ -2,9 +2,9 @@
 
 namespace sample\Before;
 
-use SimpleAOP\Advice\Before\Simple as BeforeAdvice;
+use SimpleAOP\Aspect\Before\Simple as BeforeAspect;
 
-class Simple extends BeforeAdvice
+class Simple extends BeforeAspect
 {
     /**
      * Before advice

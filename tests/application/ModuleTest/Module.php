@@ -2,15 +2,15 @@
 
 namespace ModuleTest;
 
-use SimpleAOP\Feature\AopPluginProviderInterface;
+use SimpleAOP\Feature\AopAspectProviderInterface;
 
-class Module implements AopPluginProviderInterface
+class Module implements AopAspectProviderInterface
 {
-    public function getAopPluginConfig()
+    public function getAopAspectConfig()
     {
         return array(
             'invokables' => array(
-                'security_interceptor' => 'ModuleTest\Advice\SecurityInterceptor',
+                'security_interceptor' => 'ModuleTest\Aspect\SecurityInterceptor',
             ),
         );
     }

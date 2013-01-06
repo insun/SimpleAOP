@@ -1,11 +1,11 @@
 <?php
 
-namespace SimpleAOPTest\Advice\Before;
+namespace SimpleAOPTest\Aspect\Before;
 
 use sample;
-use SimpleAOPTest\Advice\AbstractAdviceTest;
+use SimpleAOPTest\Aspect\AbstractAspectTest;
 
-class SimpleTest extends AbstractAdviceTest
+class SimpleTest extends AbstractAspectTest
 {
     public function testCanInterceptAndSetArguments()
     {

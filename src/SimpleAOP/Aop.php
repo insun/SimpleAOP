@@ -14,61 +14,61 @@ class Aop implements ServiceLocatorAwareInterface
     protected $serviceLocator;
 
     /**
-     * @var AdvicePluginManager
+     * @var AspectPluginManager
      */
-    protected $advicePluginManager;
+    protected $aspectPluginManager;
 
     /**
-     * Add an advice with the selector
-     * @param \SimpleAOP\Advice\AdviceInterface|string $advice
+     * Add an aspect with the selector
+     * @param \SimpleAOP\Aspect\AspectInterface|string $aspect
      */
-    public function register($advice)
+    public function register($aspect)
     {
-        if(is_string($advice)) {
-            $advice = $this->getAdvicePluginManager()->get($advice);
+        if(is_string($aspect)) {
+            $aspect = $this->getAspectPluginManager()->get($aspect);
         }
 
-        if(!$advice instanceof Advice\AdviceInterface) {
+        if(!$aspect instanceof Aspect\AspectInterface) {
             throw new Exception\InvalidArgumentException(sprintf(
-                'Advice must be an instance of %s\Advice\AdviceInterface', __NAMESPACE__
+                'Aspect must be an instance of %s\Aspect\AspectInterface', __NAMESPACE__
             ));
         }
 
-        if($advice instanceof ServiceLocatorAwareInterface) {
-            $advice->setServiceLocator($this->serviceLocator);
+        if($aspect instanceof ServiceLocatorAwareInterface) {
+            $aspect->setServiceLocator($this->serviceLocator);
         }
 
         switch(true) {
-            case ($advice instanceof Advice\BeforeInterface) :
-                $this->registerAdviceForType($advice, 'aop_add_before');
+            case ($aspect instanceof Aspect\BeforeInterface) :
+                $this->registerAspect($aspect, 'aop_add_before');
                 break;
-            case ($advice instanceof Advice\AfterInterface) :
-                $this->registerAdviceForType($advice, 'aop_add_after');
+            case ($aspect instanceof Aspect\AfterInterface) :
+                $this->registerAspect($aspect, 'aop_add_after');
                 break;
-            case ($advice instanceof Advice\AroundInterface) :
-                $this->registerAdviceForType($advice, 'aop_add_around');
+            case ($aspect instanceof Aspect\AroundInterface) :
+                $this->registerAspect($aspect, 'aop_add_around');
                 break;
             default:
                 throw new Exception\InvalidArgumentException(sprintf(
-                    'Advice class "%s" is invalid', get_class($advice)
+                    'Aspect class "%s" is invalid', get_class($aspect)
                 ));
         }
         return $this;
     }
 
     /**
-     * Register an advice for a type
-     * @param \SimpleAOP\Advice\AdviceInterface $advice
+     * Register an aspect for a type
+     * @param \SimpleAOP\Aspect\AspectInterface $aspect
      * @param string $register
      */
-    protected function registerAdviceForType(Advice\AdviceInterface $advice, $register)
+    protected function registerAspect(Aspect\AspectInterface $aspect, $register)
     {
-        $pcs = $advice->getPointCut();
+        $pcs = $aspect->getPointCut();
         if(!is_array($pcs)) {
             $pcs = array($pcs);
         }
         foreach($pcs as $pc) {
-            call_user_func_array($register, array($pc, $advice));
+            call_user_func_array($register, array($pc, $aspect));
         }
     }
 
@@ -92,26 +92,26 @@ class Aop implements ServiceLocatorAwareInterface
     }
 
     /**
-     * Get the advice plugin manager
-     * @return AdvicePluginManager
+     * Get the aspect plugin manager
+     * @return AspectPluginManager
      */
-    public function getAdvicePluginManager()
+    public function getAspectPluginManager()
     {
-        if(null === $this->advicePluginManager) {
-            $advicePluginManager = $this->getServiceLocator()->get('AdvicePluginManager');
-            $this->setAdvicePluginManager($advicePluginManager);
+        if(null === $this->aspectPluginManager) {
+            $aspectPluginManager = $this->getServiceLocator()->get('AspectPluginManager');
+            $this->setAspectPluginManager($aspectPluginManager);
         }
-        return $this->advicePluginManager;
+        return $this->aspectPluginManager;
     }
 
     /**
-     * Set the advice plugin manager
-     * @param \SimpleAOP\AdvicePluginManager $advicePluginManager
+     * Set the aspect plugin manager
+     * @param \SimpleAOP\AspectPluginManager $aspectPluginManager
      * @return \SimpleAOP\Aop
      */
-    public function setAdvicePluginManager(AdvicePluginManager $advicePluginManager)
+    public function setAspectPluginManager(AspectPluginManager $aspectPluginManager)
     {
-        $this->advicePluginManager = $advicePluginManager;
+        $this->aspectPluginManager = $aspectPluginManager;
         return $this;
     }
 }

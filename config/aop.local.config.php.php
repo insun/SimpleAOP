@@ -2,6 +2,6 @@
 
 return array(
     'aop' => array(
-        // here the advice list
+        // here the aspect list
     ),
 );

@@ -1,11 +1,11 @@
 <?php
 
-namespace SimpleAOPTest\Advice\Around;
+namespace SimpleAOPTest\Aspect\Around;
 
 use sample;
-use SimpleAOPTest\Advice\AbstractAdviceTest;
+use SimpleAOPTest\Aspect\AbstractAspectTest;
 
-class ActionTest extends AbstractAdviceTest
+class ActionTest extends AbstractAspectTest
 {
     protected $request;
 

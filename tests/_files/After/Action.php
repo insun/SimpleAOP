@@ -2,9 +2,9 @@
 
 namespace sample\After;
 
-use SimpleAOP\Advice\After\Action as AfterAdvice;
+use SimpleAOP\Aspect\After\Action as AfterAspect;
 
-class Action extends AfterAdvice
+class Action extends AfterAspect
 {
     /**
      * After advice in controller

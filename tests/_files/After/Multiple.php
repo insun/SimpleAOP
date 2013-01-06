@@ -3,9 +3,9 @@
 namespace sample\After;
 
 use AopJoinpoint;
-use SimpleAOP\Advice\After as AfterAdvice;
+use SimpleAOP\Aspect\After as AfterAspect;
 
-class Multiple extends AfterAdvice
+class Multiple extends AfterAspect
 {
     /**
      * After advice
