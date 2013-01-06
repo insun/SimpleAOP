@@ -179,6 +179,11 @@ class MyBeforeAdvice extends BeforeAdvice
     {
         // here a generic advice to intercept all other methods
     }
+
+    public function getPointCut()
+    {
+        return 'path\to\my\controller::*Action()'; // you can easily filter by action
+    }
 }
 ```
 
