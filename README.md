@@ -3,7 +3,7 @@ ZF2 AOP module
 
 Master: [![Build Status](https://travis-ci.org/blanchonvincent/SimpleAOP.png?branch=master)](https://travis-ci.org/blanchonvincent/SimpleAOP)
 
-Version 0.3.1 Created by [Vincent Blanchon](http://developpeur-zend-framework.fr/)
+Version 4.0.0 Created by [Vincent Blanchon](http://developpeur-zend-framework.fr/)
 
 Introduction
 ------------
