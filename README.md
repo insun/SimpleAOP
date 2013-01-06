@@ -1,12 +1,12 @@
 ZF2 AOP module
 ============
 
-Version 3.1.1 Created by [Vincent Blanchon](http://developpeur-zend-framework.fr/)
+Version 0.3.1 Created by [Vincent Blanchon](http://developpeur-zend-framework.fr/)
 
 Introduction
 ------------
 
-Simple AOP is a ZF2 module which use the [PHP AOP extension](https://github.com/AOP-PHP/AOP).
+Simple AOP is a ZF2 module which use the [PHP AOP extension](https://github.com/AOP-PHP/AOP). Supported version : 0.3.0.
 It's an additional solution to use AOP with PHP. This project can be an alternative of the excellent [Go! framework](https://github.com/lisachenko/go-aop-php).
 
 Why I should use SimpleAOP in ZF2 ?
