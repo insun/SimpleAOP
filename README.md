@@ -52,18 +52,18 @@ class ControllerCheckParams extends BeforeAdvice
 {
     public function beforeUpdateAction($request, $mvcEvent)
     {
-        $id = $mvcEvent->getRouteMatch()->getParam('id', null);
+        $userId = $mvcEvent->getRouteMatch()->getParam('id', null);
         if($id) {
             // throw exception
         }
 
         $service = $this->getServiceLocator()->get('service_user');
-        $user = $service->getUser($id);
+        $user = $service->getUser($userId);
         if($user) {
             // throw exception
         }
 
-        return array($id);
+        return array($userId);
     }
 
     public function getPointCut()

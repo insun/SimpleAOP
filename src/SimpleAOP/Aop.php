@@ -14,14 +14,18 @@ class Aop implements ServiceLocatorAwareInterface
     protected $serviceLocator;
 
     /**
+     * @var AdvicePluginManager
+     */
+    protected $advicePluginManager;
+
+    /**
      * Add an advice with the selector
      * @param \SimpleAOP\Advice\AdviceInterface|string $advice
      */
     public function register($advice)
     {
-        // TODO : create a AdvicePluginManager to manager this
         if(is_string($advice)) {
-            $advice = $this->getServiceLocator()->get($advice);
+            $advice = $this->getAdvicePluginManager()->get($advice);
         }
 
         if(!$advice instanceof Advice\AdviceInterface) {
@@ -33,7 +37,7 @@ class Aop implements ServiceLocatorAwareInterface
         if($advice instanceof ServiceLocatorAwareInterface) {
             $advice->setServiceLocator($this->serviceLocator);
         }
-        
+
         switch(true) {
             case ($advice instanceof Advice\BeforeInterface) :
                 $this->registerAdviceForType($advice, 'aop_add_before');
@@ -51,7 +55,7 @@ class Aop implements ServiceLocatorAwareInterface
         }
         return $this;
     }
-    
+
     /**
      * Register an advice for a type
      * @param \SimpleAOP\Advice\AdviceInterface $advice
@@ -85,5 +89,29 @@ class Aop implements ServiceLocatorAwareInterface
     public function getServiceLocator()
     {
         return $this->serviceLocator;
+    }
+
+    /**
+     * Get the advice plugin manager
+     * @return AdvicePluginManager
+     */
+    public function getAdvicePluginManager()
+    {
+        if(null === $this->advicePluginManager) {
+            $advicePluginManager = $this->getServiceLocator()->get('AdvicePluginManager');
+            $this->setAdvicePluginManager($advicePluginManager);
+        }
+        return $this->advicePluginManager;
+    }
+
+    /**
+     * Set the advice plugin manager
+     * @param \SimpleAOP\AdvicePluginManager $advicePluginManager
+     * @return \SimpleAOP\Aop
+     */
+    public function setAdvicePluginManager(AdvicePluginManager $advicePluginManager)
+    {
+        $this->advicePluginManager = $advicePluginManager;
+        return $this;
     }
 }

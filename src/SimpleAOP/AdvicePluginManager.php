@@ -12,7 +12,7 @@ class AdvicePluginManager extends AbstractPluginManager
      * @var array
      */
     protected $invokableClasses = array();
-    
+
     /**
      * Validate the plugin
      *
