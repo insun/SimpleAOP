@@ -40,7 +40,7 @@ return array(
 );
 ```
 
-You can use the "aop_plugins" entry or use the SimpleAOP\Feature\AOPPluginsProviderInterface in your Module.php.
+You can use the "aop_plugins" entry or use the SimpleAOP\Feature\AopPluginProviderInterface in your Module.php.
 
 In the configuration, you must define all your interceptor. The selector will be defined in the method by the getPointCut method :
 

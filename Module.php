@@ -3,10 +3,24 @@
 namespace SimpleAOP;
 
 use Zend\ModuleManager\Feature\AutoloaderProviderInterface;
+use Zend\ModuleManager\Feature\BootstrapListenerInterface;
 use Zend\ModuleManager\Feature\ServiceProviderInterface;
 
-class Module implements AutoloaderProviderInterface, ServiceProviderInterface
+class Module implements AutoloaderProviderInterface, BootstrapListenerInterface,
+    ServiceProviderInterface
 {
+    public function onBootstrap(EventInterface $e)
+    {
+        $serviceLocator = $e->getApplication()->getServiceManager();
+        $serviceListener = $serviceLocator->get('ServiceListenerInterface');
+        $serviceListener->addServiceManager(
+            'AdvicePluginManager',
+            'aop_plugins',
+            'SimpleAOP\Feature\AopPluginProviderInterface',
+            'getAopPluginConfig'
+        );
+    }
+    
     public function getAutoloaderConfig()
     {
         return array(
@@ -17,12 +31,12 @@ class Module implements AutoloaderProviderInterface, ServiceProviderInterface
             ),
         );
     }
-
+    
     public function getServiceConfig()
     {
         return array(
-            'factories' => array(
-                'aop' => 'SimpleAOP\Aop\Service\AopFactory',
+            'invokables' => array(
+                'AdvicePluginManager' => 'SimpleAOP\AdvicePluginManager',
             ),
         );
     }

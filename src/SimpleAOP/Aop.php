@@ -33,27 +33,16 @@ class Aop implements ServiceLocatorAwareInterface
         if($advice instanceof ServiceLocatorAwareInterface) {
             $advice->setServiceLocator($this->serviceLocator);
         }
-
-        // register to provide a multi subscriptions
-        $adviceRegister = function(Advice\AdviceInterface $advice, $register) {
-            $pcs = $advice->getPointCut();
-            if(!is_array($pcs)) {
-                $pcs = array($pcs);
-            }
-            foreach($pcs as $pc) {
-                call_user_func_array($register, array($pc, $advice));
-            }
-        };
-
+        
         switch(true) {
             case ($advice instanceof Advice\BeforeInterface) :
-                $adviceRegister($advice, 'aop_add_before');
+                $this->registerAdviceForType($advice, 'aop_add_before');
                 break;
             case ($advice instanceof Advice\AfterInterface) :
-                $adviceRegister($advice, 'aop_add_after');
+                $this->registerAdviceForType($advice, 'aop_add_after');
                 break;
             case ($advice instanceof Advice\AroundInterface) :
-                $adviceRegister($advice, 'aop_add_around');
+                $this->registerAdviceForType($advice, 'aop_add_around');
                 break;
             default:
                 throw new Exception\InvalidArgumentException(sprintf(
@@ -61,6 +50,22 @@ class Aop implements ServiceLocatorAwareInterface
                 ));
         }
         return $this;
+    }
+    
+    /**
+     * Register an advice for a type
+     * @param \SimpleAOP\Advice\AdviceInterface $advice
+     * @param string $register
+     */
+    protected function registerAdviceForType(Advice\AdviceInterface $advice, $register)
+    {
+        $pcs = $advice->getPointCut();
+        if(!is_array($pcs)) {
+            $pcs = array($pcs);
+        }
+        foreach($pcs as $pc) {
+            call_user_func_array($register, array($pc, $advice));
+        }
     }
 
     /**
