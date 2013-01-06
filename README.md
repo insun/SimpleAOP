@@ -128,6 +128,36 @@ return array(
 );
 ```
 
+You can use your Module to define the aspects :
+
+```php
+return array(
+    'aop' => array(
+        'my_before',
+        'other',
+        'controller_around',
+        'service_after',
+    ),
+);
+```
+
+```php
+class Module implements AopAspectProviderInterface
+{
+    public function getAopAspectConfig()
+    {
+        return array(
+            'invokables' => array(
+                'my_before' => 'sample\Interceptor\MyBefore',
+                'other_before' => 'path\to\OtherBefore',
+                'controller_around' => 'sample\Interceptor\MyAround',
+                'service_after' => 'sample\Interceptor\MyAfter',
+            ),
+        );
+    }
+}
+```
+
 Or in your code :
 
 ```php
@@ -225,7 +255,7 @@ class MyBeforeAspect extends BeforeAspect
 ```
 
 An exemple with a after joint point :
-`
+
 ```php
 use SimpleAOP\Aspect\After\Simple as AfterAspect;
 
