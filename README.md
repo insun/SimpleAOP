@@ -148,9 +148,9 @@ use SimpleAOP\Advice\Before\Action as BeforeAdvice;
 
 class MyBeforeAdvice extends BeforeAdvice
 {
-    public function beforeMyAction($request)
+    public function beforeFooAction($request)
     {
-        // here a custom advice to intercept the myaction action method
+        // here a custom advice to intercept the fooaction action method
     }
 
     public function before($request)
