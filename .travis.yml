@@ -8,7 +8,9 @@ before_script:
   - git clone https://github.com/AOP-PHP/AOP
   - sh -c "cd AOP && phpize && ./configure && make && sudo make install"
   - echo "aop.so" >> `php --ini | grep "Loaded Configuration" | sed -e "s|.*:\s*||"`
-
+  - curl -s http://getcomposer.org/installer | php
+  - php composer.phar install
+  
 script:
   - cd tests
-  - phpunit --process-isolation --bootstrap bootstrap.php .
+  - phpunit --process-isolation --bootstrap bootstrap.travis.php .
