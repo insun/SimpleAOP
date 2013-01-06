@@ -15,7 +15,7 @@ Why I should use SimpleAOP in ZF2 ?
 Because you have to concentrate on your job !
 Write in your controller only your business. Imagine, you want update a user in your controller, you want get the user id :
 
-• Before SimpleAOP
+* Before SimpleAOP
 
 ```php
 public function updateAction()
@@ -35,7 +35,7 @@ public function updateAction()
 }
 ```
 
-• After SimpleAOP
+* After SimpleAOP
 
 ```php
 public function updateAction($userId = null)
@@ -74,9 +74,9 @@ class ControllerCheckParams extends BeforeAdvice
 
 ```
 Learn more about AOP :
-• [PHP AOP extension](https://github.com/AOP-PHP/AOP) [en]
-• [Gerald's blod](http://www.croes.org/gerald/blog/aop-php-programmation-orientee-aspect/822/) [fr]
-• [developpez.com](http://www.developpez.com/actu/46202/AOP-PHP-la-programmation-orientee-aspect-en-PHP-une-nouvelle-extension-PECL-est-disponible/) [fr]
+* [PHP AOP extension](https://github.com/AOP-PHP/AOP) [en]
+* [Gerald's blod](http://www.croes.org/gerald/blog/aop-php-programmation-orientee-aspect/822/) [fr]
+* [developpez.com](http://www.developpez.com/actu/46202/AOP-PHP-la-programmation-orientee-aspect-en-PHP-une-nouvelle-extension-PECL-est-disponible/) [fr]
 
 Configuration
 ------------
