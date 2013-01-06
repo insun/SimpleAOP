@@ -1,0 +1,14 @@
+language: php
+
+php:
+  - 5.3
+  - 5.4
+
+before_script:
+  - git clone https://github.com/AOP-PHP/AOP
+  - sh -c "cd AOP && phpize && ./configure && make && sudo make install"
+  - echo "aop.so" >> `php --ini | grep "Loaded Configuration" | sed -e "s|.*:\s*||"`
+
+script:
+  - cd tests
+  - phpunit --process-isolation --bootstrap bootstrap.php .
