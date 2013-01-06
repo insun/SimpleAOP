@@ -15,6 +15,8 @@ class Action extends BeforeAdvice
     {
         if($action === 'fooAction') {
             $request->setMetadata('param1', 'foo action is intercepted');
+            $id = 'bar';
+            return array($id);
         }
     }
     

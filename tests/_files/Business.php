@@ -19,13 +19,18 @@ class Business
         return "bar";
     }
     
-    public function fooAction()
+    public function fooAction($id = null)
     {
-        return array('attr' => 'foo');
+        return array('attr' => $id);
     }
     
     public function customAction()
     {
         return array('attr' => 'custom');
+    }
+    
+    public function getEvent()
+    {
+        return new \stdClass();
     }
 }

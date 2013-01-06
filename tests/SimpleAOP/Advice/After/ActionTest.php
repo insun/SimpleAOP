@@ -9,11 +9,11 @@ class ActionTest extends AbstractAdviceTest
 {
     public function testCanInterceptAndChangeReturnValue()
     {
-        $result = $this->target->fooAction();
+        $result = $this->target->fooAction('foo');
         $this->assertEquals($result, array('attr' => 'foo'));
 
         $this->aop->register(new sample\After\Action());
-        $result = $this->target->fooAction();
+        $result = $this->target->fooAction('foo');
         $this->assertEquals($result, "foo is overrided");
     }
 

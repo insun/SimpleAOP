@@ -22,6 +22,11 @@ abstract class Action extends AbstractAdvice implements AfterActionInterceptorIn
      */
     public function __invoke(AopJoinpoint $jp)
     {
+        $controller = $jp->getObject();
+        if(!preg_match('#Action$#', $jp->getMethodName())) {
+            throw Exception\InvalidArgumentException('Action advice must be only attached on controller action');
+        }
+        
         // save the join point
         $this->setJoinPoint($jp);
 

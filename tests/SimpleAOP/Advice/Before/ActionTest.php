@@ -24,7 +24,8 @@ class ActionTest extends AbstractAdviceTest
         $this->assertEquals($this->request->getMetaData('param1'), 'bar');
 
         $this->aop->register(new sample\Before\Action());
-        $this->target->fooAction();
+        $result = $this->target->fooAction();
         $this->assertEquals($this->request->getMetaData('param1'), 'foo action is intercepted');
+        $this->assertEquals($result, array('attr' => 'bar'));
     }
 }

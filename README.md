@@ -9,6 +9,75 @@ Introduction
 Simple AOP is a ZF2 module which use the [PHP AOP extension](https://github.com/AOP-PHP/AOP).
 It's an additional solution to use AOP with PHP. This project can be an alternative of the excellent [Go! framework](https://github.com/lisachenko/go-aop-php).
 
+Why I should use SimpleAOP in ZF2 ?
+------------
+
+Because you have to concentrate on your job !
+Write in your controller only your business. Imagine, you want update a user in your controller, you want get the user id :
+
+• Before SimpleAOP
+
+```php
+public function updateAction()
+{
+    $userId = $this->getEvent()->getRouteMatch()->getParam('id', null);
+    if($userId) {
+        // throw exception
+    }
+
+    $service = $this->getServiceLocator()->get('service_user');
+    $user = $service->getUser($userId);
+    if($user) {
+        // throw exception
+    }
+
+    // here your business !
+}
+```
+
+• After SimpleAOP
+
+```php
+public function updateAction($userId = null)
+{
+    // here your business !
+}
+
+```
+
+```php
+use SimpleAOP\Advice\Before\Action as BeforeAdvice;
+
+class ControllerCheckParams extends BeforeAdvice
+{
+    public function beforeUpdateAction($request, $mvcEvent)
+    {
+        $id = $mvcEvent->getRouteMatch()->getParam('id', null);
+        if($id) {
+            // throw exception
+        }
+
+        $service = $this->getServiceLocator()->get('service_user');
+        $user = $service->getUser($id);
+        if($user) {
+            // throw exception
+        }
+
+        return array($id);
+    }
+
+    public function getPointCut()
+    {
+        return 'path\to\UserController::updateAction(); 
+    }
+}
+
+```
+Learn more about AOP :
+• [PHP AOP extension](https://github.com/AOP-PHP/AOP) [en]
+• [Gerald's blod](http://www.croes.org/gerald/blog/aop-php-programmation-orientee-aspect/822/) [fr]
+• [developpez.com](http://www.developpez.com/actu/46202/AOP-PHP-la-programmation-orientee-aspect-en-PHP-une-nouvelle-extension-PECL-est-disponible/) [fr]
+
 Configuration
 ------------
 
@@ -182,7 +251,7 @@ class MyBeforeAdvice extends BeforeAdvice
 
     public function getPointCut()
     {
-        return 'path\to\my\controller::*Action()'; // you can easily filter by action
+        return 'path\to\my\controller::*Action(); // you can easily filter by action
     }
 }
 ```
