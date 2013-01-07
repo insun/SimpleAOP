@@ -2,6 +2,8 @@
 
 namespace sample;
 
+use Zend\Mvc\MvcEvent;
+
 class Business
 {
     public function custom($arg = '')
@@ -31,6 +33,6 @@ class Business
 
     public function getEvent()
     {
-        return new \stdClass();
+        return new MvcEvent();
     }
 }

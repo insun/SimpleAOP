@@ -6,12 +6,11 @@ use SimpleAOP\Aspect\Before\Simple as BeforeAspect;
 
 class Simple extends BeforeAspect
 {
-    /**
-     * Before advice
-     * @param string $method
-     * @param array $arguments
-     * @param object $target
-     */
+    public function beforeCustom($arg = '')
+    {
+        return array('customisation in progress');
+    }
+
     public function before($method, array $arguments = array(), $target = null)
     {
         if($method === 'mirror') {
@@ -20,12 +19,11 @@ class Simple extends BeforeAspect
         }
     }
 
-    /**
-     * Get the point cut selector
-     * @return string
-     */
     public function getPointCut()
     {
-        return 'sample\Business::mirror()';
+        return array(
+            'sample\Business::custom()',
+            'sample\Business::mirror()'
+        );
     }
 }

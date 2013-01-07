@@ -4,25 +4,16 @@ namespace sample\Around;
 
 use SimpleAOP\Aspect\Around\Action as AroundAspect;
 use Zend\Stdlib\RequestInterface;
+use Zend\EventManager\EventInterface;
 
 class Action extends AroundAspect
 {
-    /**
-     * Around advice
-     * @param string $action action name
-     * @param RequestInterface $request
-     */
-    public function aroundCustomAction($action, RequestInterface $request)
+    public function aroundCustomAction(RequestInterface $request, EventInterface $event)
     {
-        return "customisation in progress";
+        $request->setMetadata('param1', 'custom in progress');
     }
 
-    /**
-     * Around advice
-     * @param string $action action name
-     * @param RequestInterface $request
-     */
-    public function around($action, RequestInterface $request)
+    public function around($action, RequestInterface $request, EventInterface $event)
     {
         if($action === 'fooAction') {
             $request->setMetadata('param1', 'foo action is intercepted');
@@ -35,10 +26,6 @@ class Action extends AroundAspect
         return $model['attr'] . " is overrided";
     }
 
-    /**
-     * Get the point cut selector
-     * @return string
-     */
     public function getPointCut()
     {
         return 'sample\Business::*Action()';

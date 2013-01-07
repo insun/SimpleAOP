@@ -29,4 +29,15 @@ class ActionTest extends AbstractAspectTest
         $this->assertEquals($result, "foo is overrided");
         $this->assertEquals($this->request->getMetaData('param1'), 'foo action is intercepted');
     }
+
+    public function testCanInterceptInCustomeMethod()
+    {
+        $this->request->setMetadata('param1', 'bar');
+        $result = $this->target->customAction();
+        $this->assertEquals($this->request->getMetaData('param1'), 'bar');
+
+        $this->aop->register(new sample\Around\Action());
+        $result = $this->target->customAction();
+        $this->assertEquals($this->request->getMetaData('param1'), "custom in progress");
+    }
 }

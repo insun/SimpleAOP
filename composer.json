@@ -1,7 +1,7 @@
 {
     "name": "blanchonvincent/simple-aop",
-    "description": "ZF2 module v0.4.1 - Provide a simple module to use AOP in PHP",
-    "version": "0.4.1",
+    "description": "ZF2 module v0.4.2 - Provide a simple module to use AOP in PHP",
+    "version": "0.4.2",
     "type": "module",
     "license": "MIT",
     "tags": [

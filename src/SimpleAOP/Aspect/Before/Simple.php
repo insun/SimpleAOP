@@ -28,12 +28,14 @@ abstract class Simple extends AbstractAspect implements BeforeSimpleInterceptorI
         // check custom interceptor
         $method = "before" . ucfirst($jp->getMethodName());
         if(method_exists($this, $method)) {
-            call_user_func_array(array($this, $method), $jp->getArguments());
-            return;
+            $args = call_user_func_array(array($this, $method), $jp->getArguments);
+        } else {
+            // call generic interceptor
+            $args = $this->before($jp->getMethodName(), $jp->getArguments(), $jp->getObject());
         }
-
-        // call generic interceptor
-        $this->before($jp->getMethodName(), $jp->getArguments(), $jp->getObject());
+        if(is_array($args)) {
+            $jp->setArguments($args);
+        }
     }
 
     /**

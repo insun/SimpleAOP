@@ -1,9 +1,9 @@
 ZF2 AOP module
 ============
 
-Master: [![Build Status](https://travis-ci.org/blanchonvincent/SimpleAOP.png?branch=master)](https://travis-ci.org/blanchonvincent/SimpleAOP)
+Master: [![Build Status](https://travis-ci.org/blanchonvincent/SimpleAOP.png?branch=master&v=4.0.2)](https://travis-ci.org/blanchonvincent/SimpleAOP)
 
-Version 0.4.1 Created by [Vincent Blanchon](http://developpeur-zend-framework.fr/)
+Version 0.4.2 Created by [Vincent Blanchon](http://developpeur-zend-framework.fr/)
 
 Introduction
 ------------
@@ -289,7 +289,7 @@ class MyBeforeAspect extends BeforeAspect
 {
     public function beforeFooAction($request, $mvcEvent)
     {
-        // here a custom advice to intercept the fooaction action method
+        // here a custom advice to intercept the fooAction method
     }
 
     public function before($request, $mvcEvent)
@@ -310,8 +310,8 @@ argument to make life easier for developer.
 Testing
 ------------
 
-**More 90% code coverage**. Run tests with the command
+**More 90% code coverage**. Run tests with the command :
 
 ```php
-cd tests/ && ./run.sh :
+cd tests/ && ./run.sh
 ```

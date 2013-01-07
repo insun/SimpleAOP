@@ -16,4 +16,14 @@ class SimpleTest extends AbstractAspectTest
         $result = $this->target->mirror('zend');
         $this->assertEquals($result, 'before is overrided');
     }
+
+    public function testCanInterceptAndSetArgumentsInCustomMethod()
+    {
+        $result = $this->target->custom();
+        $this->assertEquals($result, 'custom');
+
+        $this->aop->register(new sample\Around\Simple());
+        $result = $this->target->custom();
+        $this->assertEquals($result, "customisation in progress");
+    }
 }

@@ -38,7 +38,7 @@ abstract class Action extends AbstractAspect implements BeforeActionInterceptorI
         // check custom interceptor
         $method = "before" . ucfirst($jp->getMethodName());
         if(method_exists($this, $method)) {
-            $args = call_user_func_array(array($this, $method), array($jp->getMethodName(), $request, $event));
+            $args = call_user_func_array(array($this, $method), array($request, $event));
         } else {
             // call generic interceptor
             $args = $this->before($jp->getMethodName(), $request, $event);

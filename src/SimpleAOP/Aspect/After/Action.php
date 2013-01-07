@@ -6,6 +6,7 @@ use AopJoinpoint;
 use SimpleAOP\Aspect\AbstractAspect;
 use SimpleAOP\Aspect\Feature\AfterActionInterceptorInterface;
 use SimpleAOP\Aspect\Feature\JoinPointAwareInterface;
+use Zend\Stdlib\Exception;
 
 abstract class Action extends AbstractAspect implements AfterActionInterceptorInterface,
     JoinPointAwareInterface

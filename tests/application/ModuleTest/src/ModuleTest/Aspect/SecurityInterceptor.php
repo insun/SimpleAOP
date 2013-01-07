@@ -4,19 +4,18 @@ namespace ModuleTest\Aspect;
 
 use SimpleAOP\Aspect\Before\Action as BeforeAspect;
 use Zend\Stdlib\RequestInterface;
+use Zend\EventManager\EventInterface;
 
 class SecurityInterceptor extends BeforeAspect
 {
-    public function before($action, RequestInterface $request)
+    public function before($action, RequestInterface $request, EventInterface $event)
     {
-        $token = $request->getQuery('token');
-        if(null === $token) {
-            throw new \RuntimeException('Token do not exists');
-        }
+        $msg = 'success';
+        return array($msg);
     }
 
     public function getPointCut()
     {
-        return 'Foo\Controller\*::*Action()';
+        return 'ModuleTest\Controller\*::*Action()';
     }
 }

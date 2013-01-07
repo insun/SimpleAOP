@@ -12,11 +12,6 @@ class Before extends BeforeAspect
         $jp->setArguments(array(' in progress'));
     }
 
-    /**
-     * Advice callback
-     * @param AopJoinpoint $jp
-     * @return mixed
-     */
     public function before(AopJoinpoint $jp)
     {
         if($jp->getMethodName() === 'mirror') {
@@ -24,10 +19,6 @@ class Before extends BeforeAspect
         }
     }
 
-    /**
-     * Get the point cut selector
-     * @return string
-     */
     public function getPointCut()
     {
         return array(

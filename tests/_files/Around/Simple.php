@@ -6,12 +6,11 @@ use SimpleAOP\Aspect\Around\Simple as AroundAspect;
 
 class Simple extends AroundAspect
 {
-    /**
-     * Around advice
-     * @param string $method
-     * @param array $arguments
-     * @param object $target
-     */
+    public function aroundCustom($arg = '')
+    {
+        return "customisation in progress";
+    }
+
     public function around($method, array $arguments = array(), $target = null)
     {
         $jp = $this->getJoinPoint();
@@ -25,12 +24,11 @@ class Simple extends AroundAspect
         return  $return . " is overrided";
     }
 
-    /**
-     * Get the point cut selector
-     * @return string
-     */
     public function getPointCut()
     {
-        return 'sample\Business::mirror()';
+        return array(
+            'sample\Business::custom()',
+            'sample\Business::mirror()'
+        );
     }
 }

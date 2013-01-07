@@ -6,6 +6,7 @@ use AopJoinpoint;
 use SimpleAOP\Aspect\AbstractAspect;
 use SimpleAOP\Aspect\Feature\AroundActionInterceptorInterface;
 use SimpleAOP\Aspect\Feature\JoinPointAwareInterface;
+use Zend\Stdlib\Exception;
 
 abstract class Action extends AbstractAspect implements AroundActionInterceptorInterface,
     JoinPointAwareInterface
@@ -32,14 +33,15 @@ abstract class Action extends AbstractAspect implements AroundActionInterceptorI
 
         // get the application request
         $request = $this->getServiceLocator()->get('Request');
+        $event = $controller->getEvent();
 
         // check custom interceptor
         $method = "around" . ucfirst($jp->getMethodName());
         if(method_exists($this, $method)) {
-            call_user_func_array(array($this, $method), array($jp->getMethodName(), $request));
+            $return = call_user_func_array(array($this, $method), array($request, $event));
         } else {
             // call generic interceptor
-            $return = $this->around($jp->getMethodName(), $request);
+            $return = $this->around($jp->getMethodName(), $request, $event);
         }
         if(null != $return) {
             $jp->setReturnedValue($return);

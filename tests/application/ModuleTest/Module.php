@@ -13,6 +13,27 @@ class Module implements AopAspectProviderInterface, ConfigProviderInterface
             'aop' => array(
                 'security_interceptor',
             ),
+            'console' => array(
+                'router' => array(
+                    'routes' => array(
+                        'tests' => array(
+                            'type' => 'simple',
+                            'options' => array(
+                                'route' => '--tests',
+                                'defaults' => array(
+                                    'controller' => 'test_test',
+                                    'action'     => 'test',
+                                ),
+                            ),
+                        ),
+                    ),
+                ),
+            ),
+            'controllers' => array(
+                'invokables' => array(
+                    'test_test' => 'ModuleTest\Controller\TestController',
+                ),
+            ),
         );
     }
 

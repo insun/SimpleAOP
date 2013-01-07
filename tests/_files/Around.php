@@ -12,11 +12,6 @@ class Around extends AroundAspect
         $jp->setReturnedValue("customisation in progress");
     }
 
-    /**
-     * Advice callback
-     * @param AopJoinpoint $jp
-     * @return mixed
-     */
     public function around(AopJoinpoint $jp)
     {
         if($jp->getMethodName() === 'mirror') {
@@ -30,10 +25,6 @@ class Around extends AroundAspect
         }
     }
 
-    /**
-     * Get the point cut selector
-     * @return string
-     */
     public function getPointCut()
     {
         return array(
