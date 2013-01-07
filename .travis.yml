@@ -13,4 +13,4 @@ before_script:
  
 script:
   - cd tests
-  - phpunit --process-isolation --bootstrap bootstrap.travis.php .
+  - phpunit --bootstrap bootstrap.travis.php .
