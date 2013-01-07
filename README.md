@@ -23,13 +23,13 @@ Write in your controller only your business. Imagine, you want update a user in 
 public function updateAction()
 {
     $userId = $this->getEvent()->getRouteMatch()->getParam('id', null);
-    if($userId) {
+    if(!$userId) {
         // throw exception
     }
 
     $service = $this->getServiceLocator()->get('service_user');
     $user = $service->getUser($userId);
-    if($user) {
+    if(!$user) {
         // throw exception
     }
 
@@ -55,13 +55,13 @@ class ControllerCheckParams extends BeforeAspect
     public function beforeUpdateAction($request, $mvcEvent)
     {
         $userId = $mvcEvent->getRouteMatch()->getParam('id', null);
-        if($userId) {
+        if(!$userId) {
             // throw exception
         }
 
         $service = $this->getServiceLocator()->get('service_user');
         $user = $service->getUser($userId);
-        if($user) {
+        if(!$user) {
             // throw exception
         }
 
