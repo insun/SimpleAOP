@@ -55,7 +55,7 @@ class ControllerCheckParams extends BeforeAspect
     public function beforeUpdateAction($request, $mvcEvent)
     {
         $userId = $mvcEvent->getRouteMatch()->getParam('id', null);
-        if($id) {
+        if($userId) {
             // throw exception
         }
 
