@@ -18,13 +18,13 @@ class Simple extends AroundAspect
         if($method === 'mirror') {
             $jp->setArguments(array('before', 'intercepted'));
         }
-        
+
         $jp->process();
         $return = $jp->getReturnedValue();
-        
+
         return  $return . " is overrided";
     }
-    
+
     /**
      * Get the point cut selector
      * @return string

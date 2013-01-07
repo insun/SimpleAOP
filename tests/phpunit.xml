@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <phpunit colors="true" processIsolation="true" verbose="true">
-  <filter>
+  <filter>i
     <whitelist processUncoveredFilesFromWhitelist="true">
       <directory suffix=".php">../src/</directory>
+      <file>../Module.php</file>
     </whitelist>
   </filter>
 </phpunit>

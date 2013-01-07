@@ -15,7 +15,7 @@ class After extends AfterAspect
     {
         $jp->setReturnedValue("customisation in progress");
     }
-    
+
     /**
      * After advice
      * @param AopJoinpoint $jp
@@ -26,7 +26,7 @@ class After extends AfterAspect
             $jp->setReturnedValue($jp->getReturnedValue() . " is overrided");
         }
     }
-    
+
     /**
      * Get the point cut selector
      * @return string

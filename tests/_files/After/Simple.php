@@ -14,16 +14,17 @@ class Simple extends AfterAspect
     {
         return "customisation in progress";
     }
-    
+
     /**
      * After advice
      * @param mixed $return
      */
     public function after($return)
     {
-        return  $return . " is overrided";
+        $jp = $this->getJoinPoint();
+        return $jp->getReturnedValue() . " is overrided";
     }
-    
+
     /**
      * Get the point cut selector
      * @return string

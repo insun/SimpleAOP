@@ -1,13 +1,13 @@
 <?php
 return array(
     'modules' => array(
-        'ModuleTest',
+        'EmptyTest',
         'SimpleAOP',
     ),
     'module_listener_options' => array(
         'config_cache_enabled' => false,
         'module_paths'         => array(
-            'ModuleTest' => __DIR__ . '/ModuleTest/',
+            'EmptyTest' => __DIR__ . '/EmptyTest/',
             'SimpleAOP' => __DIR__ . '/../../',
         ),
     ),

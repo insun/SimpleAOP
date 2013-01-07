@@ -29,7 +29,7 @@ class AspectPluginManager extends AbstractPluginManager
             return;
         }
 
-        throw new Exception\InvalidHelperException(sprintf(
+        throw new Exception\InvalidAspectException(sprintf(
             'Plugin of type %s is invalid; must implement %s\Aspect\AspectInterface',
             (is_object($plugin) ? get_class($plugin) : gettype($plugin)),
             __NAMESPACE__

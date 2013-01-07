@@ -16,7 +16,7 @@ class Action extends AroundAspect
     {
         return "customisation in progress";
     }
-    
+
     /**
      * Around advice
      * @param string $action action name
@@ -27,14 +27,14 @@ class Action extends AroundAspect
         if($action === 'fooAction') {
             $request->setMetadata('param1', 'foo action is intercepted');
         }
-        
+
         $jp = $this->getJoinPoint();
         $jp->process();
-        
+
         $model = $jp->getReturnedValue();
         return $model['attr'] . " is overrided";
     }
-    
+
     /**
      * Get the point cut selector
      * @return string

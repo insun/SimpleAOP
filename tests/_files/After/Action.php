@@ -14,7 +14,7 @@ class Action extends AfterAspect
     {
         return "customisation in progress";
     }
-    
+
     /**
      * After advice in controller
      * @param null|ModelInterface $model
@@ -23,7 +23,7 @@ class Action extends AfterAspect
     {
         return $model['attr'] . " is overrided";
     }
-    
+
     /**
      * Get the point cut selector
      * @return string

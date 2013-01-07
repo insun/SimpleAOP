@@ -14,7 +14,7 @@ class SecurityInterceptor extends BeforeAspect
             throw new \RuntimeException('Token do not exists');
         }
     }
-    
+
     public function getPointCut()
     {
         return 'Foo\Controller\*::*Action()';

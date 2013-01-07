@@ -7,6 +7,11 @@ use SimpleAOP\Aspect\Before as BeforeAspect;
 
 class Before extends BeforeAspect
 {
+    public function beforeCustom(AopJoinpoint $jp)
+    {
+        $jp->setArguments(array(' in progress'));
+    }
+
     /**
      * Advice callback
      * @param AopJoinpoint $jp
@@ -18,13 +23,16 @@ class Before extends BeforeAspect
             $jp->setArguments(array('intercepted'));
         }
     }
-    
+
     /**
      * Get the point cut selector
      * @return string
      */
     public function getPointCut()
     {
-        return 'sample\Business::mirror()';
+        return array(
+            'sample\Business::custom()',
+            'sample\Business::mirror()'
+        );
     }
 }

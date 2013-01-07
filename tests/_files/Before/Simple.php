@@ -19,7 +19,7 @@ class Simple extends BeforeAspect
             $jp->setArguments(array('intercepted'));
         }
     }
-    
+
     /**
      * Get the point cut selector
      * @return string

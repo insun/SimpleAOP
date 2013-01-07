@@ -17,7 +17,7 @@ abstract class Before extends AbstractAspect implements BeforeInterceptorInterfa
         // check custom interceptor
         $method = "before" . ucfirst($jp->getMethodName());
         if(method_exists($this, $method)) {
-            call_user_func_array(array($this, $method), $jp);
+            call_user_func_array(array($this, $method), array($jp));
             return;
         }
 

@@ -19,7 +19,6 @@ class ActionTest extends AbstractAspectTest
     public function testCanInterceptAndSetArguments()
     {
         $this->request->setMetadata('param1', 'bar');
-
         $this->target->fooAction();
         $this->assertEquals($this->request->getMetaData('param1'), 'bar');
 
@@ -27,5 +26,16 @@ class ActionTest extends AbstractAspectTest
         $result = $this->target->fooAction();
         $this->assertEquals($this->request->getMetaData('param1'), 'foo action is intercepted');
         $this->assertEquals($result, array('attr' => 'bar'));
+    }
+
+    public function testCanInterceptAndSetArgumentsInCustomeMethod()
+    {
+        $this->request->setMetadata('param1', 'bar');
+        $result = $this->target->customAction();
+        $this->assertEquals($this->request->getMetaData('param1'), 'bar');
+
+        $this->aop->register(new sample\Before\Action());
+        $result = $this->target->customAction();
+        $this->assertEquals($this->request->getMetaData('param1'), "custom in progress");
     }
 }

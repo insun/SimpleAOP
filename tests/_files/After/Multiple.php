@@ -15,7 +15,7 @@ class Multiple extends AfterAspect
     {
         $jp->setReturnedValue($jp->getReturnedValue() . " is overrided");
     }
-    
+
     /**
      * Get the point cut selector
      * @return string

@@ -4,7 +4,6 @@ namespace SimpleAOP;
 
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
-use Zend\Stdlib\Exception;
 
 class Aop implements ServiceLocatorAwareInterface
 {
@@ -29,7 +28,7 @@ class Aop implements ServiceLocatorAwareInterface
         }
 
         if(!$aspect instanceof Aspect\AspectInterface) {
-            throw new Exception\InvalidArgumentException(sprintf(
+            throw new Exception\InvalidAspectException(sprintf(
                 'Aspect must be an instance of %s\Aspect\AspectInterface', __NAMESPACE__
             ));
         }
@@ -49,7 +48,7 @@ class Aop implements ServiceLocatorAwareInterface
                 $this->registerAspect($aspect, 'aop_add_around');
                 break;
             default:
-                throw new Exception\InvalidArgumentException(sprintf(
+                throw new Exception\InvalidAspectException(sprintf(
                     'Aspect class "%s" is invalid', get_class($aspect)
                 ));
         }

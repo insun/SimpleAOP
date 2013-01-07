@@ -15,4 +15,14 @@ class BeforeTest extends AbstractAspectTest
         $result = $this->target->mirror('zend');
         $this->assertEquals($result, 'intercepted');
     }
+
+    public function testCanInterceptAndSetArgumentsInCustomeMethod()
+    {
+        $result = $this->target->custom();
+        $this->assertEquals($result, "custom");
+
+        $this->aop->register(new sample\Before());
+        $result = $this->target->custom();
+        $this->assertEquals($result, "custom in progress");
+    }
 }

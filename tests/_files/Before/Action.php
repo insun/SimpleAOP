@@ -7,6 +7,11 @@ use Zend\Stdlib\RequestInterface;
 
 class Action extends BeforeAspect
 {
+    public function beforeCustomAction($action, RequestInterface $request)
+    {
+        $request->setMetadata('param1', 'custom in progress');
+    }
+
     /**
      * Before advice
      * @param RequestInterface $request
@@ -19,7 +24,7 @@ class Action extends BeforeAspect
             return array($id);
         }
     }
-    
+
     /**
      * Get the point cut selector
      * @return string

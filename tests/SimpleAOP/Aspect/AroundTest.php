@@ -15,4 +15,14 @@ class AroundTest extends AbstractAspectTest
         $result = $this->target->mirror('zend');
         $this->assertEquals($result, "intercepted is overrided");
     }
+
+    public function testCanInterceptAndChangeReturnValueInCustomeMethod()
+    {
+        $result = $this->target->custom();
+        $this->assertEquals($result, "custom");
+
+        $this->aop->register(new sample\Around());
+        $result = $this->target->custom();
+        $this->assertEquals($result, "customisation in progress");
+    }
 }

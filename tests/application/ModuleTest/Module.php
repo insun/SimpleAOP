@@ -3,9 +3,19 @@
 namespace ModuleTest;
 
 use SimpleAOP\Feature\AopAspectProviderInterface;
+use Zend\ModuleManager\Feature\ConfigProviderInterface;
 
-class Module implements AopAspectProviderInterface
+class Module implements AopAspectProviderInterface, ConfigProviderInterface
 {
+    public function getConfig()
+    {
+        return array(
+            'aop' => array(
+                'security_interceptor',
+            ),
+        );
+    }
+
     public function getAopAspectConfig()
     {
         return array(
