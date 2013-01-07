@@ -5,12 +5,6 @@ Master: [![Build Status](https://travis-ci.org/blanchonvincent/SimpleAOP.png?bra
 
 Version 0.4.1 Created by [Vincent Blanchon](http://developpeur-zend-framework.fr/)
 
-**More 90% code coverage**. Run tests with the command
-
-```php
-cd tests/ && ./run.sh
-```
-
 Introduction
 ------------
 
@@ -312,3 +306,12 @@ class MyBeforeAspect extends BeforeAspect
 
 The action methods have no parameters, but the application request is passed in 
 argument to make life easier for developer.
+
+Testing
+------------
+
+**More 90% code coverage**. Run tests with the command
+
+```php
+cd tests/ && ./run.sh :
+```
