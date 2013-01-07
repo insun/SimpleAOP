@@ -1,4 +1,5 @@
 #! /bin/sh
 
 clear
-phpunit --colors --process-isolation --coverage-php coverage/ --bootstrap bootstrap.php .
+phpunit --coverage-html ./coverage-html --bootstrap bootstrap.php .
+echo "\n"
