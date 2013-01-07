@@ -119,10 +119,10 @@ return array(
     ),
     'aop_aspects' => array(
         'invokables' => array(
-            'my_before' => 'sample\Interceptor\MyBefore',
-            'other_before' => 'path\to\OtherBefore',
-            'controller_around' => 'sample\Interceptor\MyAround',
-            'service_after' => 'sample\Interceptor\MyAfter',
+            'my_before' => 'sample\Aspect\MyBefore',
+            'other_before' => 'path\to\Aspect\OtherBefore',
+            'controller_around' => 'sample\Aspect\Controller\MyAround',
+            'service_after' => 'sample\Aspect\MyAfter',
         ),
     ),
 );
@@ -148,10 +148,10 @@ class Module implements AopAspectProviderInterface
     {
         return array(
             'invokables' => array(
-                'my_before' => 'sample\Interceptor\MyBefore',
-                'other_before' => 'path\to\OtherBefore',
-                'controller_around' => 'sample\Interceptor\MyAround',
-                'service_after' => 'sample\Interceptor\MyAfter',
+                'my_before' => 'sample\Aspect\MyBefore',
+                'other_before' => 'path\to\Aspect\OtherBefore',
+                'controller_around' => 'sample\Aspect\Controller\MyAround',
+                'service_after' => 'sample\Aspect\MyAfter',
             ),
         );
     }
@@ -209,7 +209,7 @@ class MyAfter extends After
 Basic usage
 ------------
 
-The basic usage use classic aspect. An exemple
+The basic usage use classic aspect. An example
 with a before joint point :
 
 ```php
@@ -233,7 +233,7 @@ class MyBeforeAspect extends BeforeAspect
 Usage with formatted advice
 ------------
 
-An other usage format the arguments to have pretty advice. An exemple
+An other usage format the arguments to have pretty advice. An example
 with a before joint point :
 
 ```php
@@ -254,7 +254,7 @@ class MyBeforeAspect extends BeforeAspect
 }
 ```
 
-An exemple with a after joint point :
+An example with a after joint point :
 
 ```php
 use SimpleAOP\Aspect\After\Simple as AfterAspect;
@@ -279,7 +279,7 @@ class MyAfterAspect extends AfterAspect
 Usage with the ZF2 controllers
 ------------
 
-The usage with ZF2 controllers format the arguments to provide request object. An exemple
+The usage with ZF2 controllers format the arguments to provide request object. An example
 with a before before joint point :
 
 ```php
