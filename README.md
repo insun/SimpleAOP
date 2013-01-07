@@ -4,7 +4,7 @@ ZF2 AOP module
 Master: [![Build Status](https://travis-ci.org/blanchonvincent/SimpleAOP.png?branch=master)](https://travis-ci.org/blanchonvincent/SimpleAOP)
 
 Version 0.4.1 Created by [Vincent Blanchon](http://developpeur-zend-framework.fr/)
-** More 90% code coverage**
+**More 90% code coverage**
 Run tests with the command
 
 ```php
