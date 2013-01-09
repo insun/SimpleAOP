@@ -17,6 +17,13 @@ class ActionTest extends AbstractAspectTest
         $this->assertEquals($result, "foo is overrided");
     }
 
+    public function testCanNotInterceptNoActionMethod()
+    {
+        $this->setExpectedException('Zend\Stdlib\Exception\InvalidArgumentException');
+        $this->aop->register(new sample\After\Action\BadPointCut());
+        $this->target->mirror('test');
+    }
+
     public function testCanInterceptAndChangeReturnValueInCustomeMethod()
     {
         $result = $this->target->customAction();

@@ -25,7 +25,7 @@ abstract class Action extends AbstractAspect implements BeforeActionInterceptorI
     {
         $controller = $jp->getObject();
         if(!preg_match('#Action$#', $jp->getMethodName())) {
-            throw Exception\InvalidArgumentException('Action advice must be only attached on controller action');
+            throw new Exception\InvalidArgumentException('Action advice must be only attached on controller action');
         }
 
         // save the join point

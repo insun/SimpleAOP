@@ -8,7 +8,8 @@ class Action extends AfterAspect
 {
     public function afterCustomAction($model)
     {
-        return "customisation in progress";
+        $args = implode('', $this->getJoinPoint()->getArguments());
+        return "customisation in progress" . $args;
     }
 
     public function after($model)

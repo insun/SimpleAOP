@@ -28,6 +28,13 @@ class ActionTest extends AbstractAspectTest
         $this->assertEquals($result, array('attr' => 'bar'));
     }
 
+    public function testCanNotInterceptNoActionMethod()
+    {
+        $this->setExpectedException('Zend\Stdlib\Exception\InvalidArgumentException');
+        $this->aop->register(new sample\Before\Action\BadPointCut());
+        $this->target->mirror('test');
+    }
+
     public function testCanInterceptAndSetArgumentsInCustomeMethod()
     {
         $this->request->setMetadata('param1', 'bar');

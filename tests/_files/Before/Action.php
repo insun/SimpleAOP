@@ -10,7 +10,8 @@ class Action extends BeforeAspect
 {
     public function beforeCustomAction(RequestInterface $request, EventInterface $mvcEvent)
     {
-        $request->setMetadata('param1', 'custom in progress');
+        $args = implode('', $this->getJoinPoint()->getArguments());
+        $request->setMetadata('param1', 'custom in progress' . $args);
     }
 
     public function before($action, RequestInterface $request, EventInterface $mvcEvent)

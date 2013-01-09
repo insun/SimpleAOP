@@ -8,7 +8,7 @@ class Simple extends BeforeAspect
 {
     public function beforeCustom($arg = '')
     {
-        return array('customisation in progress');
+        return array(' in progress');
     }
 
     public function before($method, array $arguments = array(), $target = null)

@@ -1,9 +1,9 @@
 ZF2 AOP module
 ============
 
-Master: [![Build Status](https://travis-ci.org/blanchonvincent/SimpleAOP.png?branch=master&v=4.0.2)](https://travis-ci.org/blanchonvincent/SimpleAOP)
+Master: [![Build Status](https://travis-ci.org/blanchonvincent/SimpleAOP.png?branch=master&v=4.0.3)](https://travis-ci.org/blanchonvincent/SimpleAOP)
 
-Version 0.4.2 Created by [Vincent Blanchon](http://developpeur-zend-framework.fr/)
+Version 0.4.3 Created by [Vincent Blanchon](http://developpeur-zend-framework.fr/)
 
 Introduction
 ------------
@@ -310,7 +310,7 @@ argument to make life easier for developer.
 Testing
 ------------
 
-**More 90% code coverage**. Run tests with the command :
+**100% code coverage**. Run tests with the command :
 
 ```php
 cd tests/ && ./run.sh

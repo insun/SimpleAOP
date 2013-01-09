@@ -24,6 +24,6 @@ class SimpleTest extends AbstractAspectTest
 
         $this->aop->register(new sample\Before\Simple());
         $result = $this->target->custom();
-        $this->assertEquals($result, 'customisation in progress');
+        $this->assertEquals($result, 'custom in progress');
     }
 }

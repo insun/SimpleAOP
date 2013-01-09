@@ -10,7 +10,8 @@ class Action extends AroundAspect
 {
     public function aroundCustomAction(RequestInterface $request, EventInterface $event)
     {
-        $request->setMetadata('param1', 'custom in progress');
+        $args = implode('', $this->getJoinPoint()->getArguments());
+        $request->setMetadata('param1', 'custom in progress' . $args);
     }
 
     public function around($action, RequestInterface $request, EventInterface $event)
