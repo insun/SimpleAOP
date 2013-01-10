@@ -307,6 +307,36 @@ class MyBeforeAspect extends BeforeAspect
 The action methods have no parameters, but the application request is passed in 
 argument to make life easier for developer.
 
+Performance
+------------
+
+The **first** use case :
+* 1 before aspect with 1 wildcards used
+* 1 after aspect with 1 wildcard used
+
+The performance in average :
+* 21,5 ms by application test without AOP, 10,00 MB memory used
+* 23,5 ms by application test with AOP   , 10,15 MB memory used
+
+With AOP, +2ms & 0,15MB 
+
+The **second** use case :
+* 1 before aspect with 2 wildcards used
+* 1 after aspect with 1 wildcard used
+* 3 aspects registered unused with 2 wildcards
+
+The performance in average :
+* 21,5 ms by application test without AOP, 10,00 MB memory used
+* 26,0 ms by application test with AOP   , 10,30 MB memory used
+
+With AOP, +4,5ms & 0,3MB
+
+Run the benchmark with :
+
+```php
+cd benchmark/ && ./run.sh
+```
+
 Testing
 ------------
 
