@@ -15,7 +15,6 @@ class Module implements AutoloaderProviderInterface, ServiceProviderInterface,
     {
         $application = $e->getApplication();
         $serviceLocator = $application->getServiceManager();
-        $aop = $serviceLocator->get('aop');
         $configuration = $serviceLocator->get('Config');
         if(!isset($configuration['aop'])) {
             return;
@@ -24,6 +23,7 @@ class Module implements AutoloaderProviderInterface, ServiceProviderInterface,
         $config = new Config($configuration['aop']);
         $config->configureServiceManager($aspectPluginManager);
         
+        $aop = $serviceLocator->get('aop');
         foreach($aspectPluginManager->getRegisteredServices() as $services) {
             foreach($services as $aspect) {
                 $aop->register($aspect);
