@@ -6,6 +6,7 @@ use Zend\EventManager\EventInterface;
 use Zend\ModuleManager\Feature\AutoloaderProviderInterface;
 use Zend\ModuleManager\Feature\ServiceProviderInterface;
 use Zend\ModuleManager\Feature\BootstrapListenerInterface;
+use Zend\ServiceManager\Config;
 
 class Module implements AutoloaderProviderInterface, ServiceProviderInterface,
     BootstrapListenerInterface
@@ -15,12 +16,18 @@ class Module implements AutoloaderProviderInterface, ServiceProviderInterface,
         $application = $e->getApplication();
         $serviceLocator = $application->getServiceManager();
         $aop = $serviceLocator->get('aop');
-        $config = $serviceLocator->get('Config');
-        if(!isset($config['aop'])) {
+        $configuration = $serviceLocator->get('Config');
+        if(!isset($configuration['aop'])) {
             return;
         }
-        foreach($config['aop'] as $aspect) {
-            $aop->register($aspect);
+        $aspectPluginManager = $serviceLocator->get('AspectPluginManager');
+        $config = new Config($configuration['aop']);
+        $config->configureServiceManager($aspectPluginManager);
+        
+        foreach($aspectPluginManager->getRegisteredServices() as $services) {
+            foreach($services as $aspect) {
+                $aop->register($aspect);
+            }
         }
     }
 
