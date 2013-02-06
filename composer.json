@@ -24,6 +24,9 @@
     "autoload": {
     	"psr-0": {
             "SimpleAOP": "src/"
-    	}
+    	},
+        "classmap": [
+            "./Module.php"
+        ]
     }
 }
